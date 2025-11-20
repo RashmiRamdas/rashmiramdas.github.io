@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>How Browsers Work</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <article class="content">
+      <h1>How browsers work?</h1>
+
+      <p>
+        Web users expect fast-loading and smooth-interacting experiences.
+        Therefore, a developer should strive to achieve these two goals. To
+        understand how to improve performance and perceived performance, it
+        helps to understand how the browser works.
+      </p>
+
+      <section>
+        <h2>Navigation</h2>
+        <p>
+          Navigation is the first step in loading a web page. It occurs whenever
+          a user requests a page by entering a URL into the address bar,
+          clicking a link, submitting a form, as well as other actions. Key
+          steps in navigation include: DNS lookup, TCP handshake, TLS
+          negotiation
+        </p>
+        <ul>
+          <li>
+            <strong>DNS lookup:</strong> resolving the hostname to an IP
+            address. Each unique hostname used in a page (fonts, images,
+            scripts) may require its own lookup.
+          </li>
+          <li>
+            <strong>TCP handshake:</strong> after obtaining the IP, the browser
+            and server establish a TCP connection via the three-way handshake
+            (SYN, SYN-ACK, ACK).
+          </li>
+          <li>
+            <strong>TLS negotiation (when using HTTPS):</strong> multiple
+            round-trips to negotiate encryption, verify the server, and set up
+            the secure channel. This adds latency but is critical for security.
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Response</h2>
+        <p>
+          Once the connection is established, the browser sends an HTTP GET
+          request (typically for the HTML). The server responds with headers
+          plus the payload (the HTML file). The time from request to first byte
+          of response is known as Time to First Byte (TTFB).
+        </p>
+      </section>
+
+      <section>
+        <h2>Parsing</h2>
+        <p>
+          Once the browser receives the first chunk of data, it can begin
+          parsing the information received. Parsing is the step the browser
+          takes to turn the data it receives over the network into the DOM and
+          CSSOM, which is used by the renderer to paint a page to the screen.
+        </p>
+      </section>
+
+      <section>
+        <h2>Critical Rendering Path</h2>
+        <p>
+          The Critical Rendering Path (CRP) is the sequence of steps the browser
+          goes through to convert HTML, CSS, and JavaScript into pixels on the
+          screen. Optimising the CRP improves render performance. Key
+          components: DOM tree, CSSOM tree, render tree, layout and paint.
+        </p>
+        <p>
+          <em>Note:</em> Understanding and optimising the CRP helps reduce
+          time-to-first-render, avoid “jank” (i.e., stuttering) and make
+          animations/scrolling smooth.
+        </p>
+        <ul>
+          <li>
+            <strong>Document Object Model (DOM):</strong> The HTML response
+            turns into tokens which turns into nodes which turn into the DOM
+            Tree.
+          </li>
+          <li>
+            <strong>CSS Object Model (CSSOM):</strong> The CSSOM contains all
+            the information on how to style the DOM. CSS is render blocking: the
+            browser blocks page rendering until it receives and processes all
+            the CSS. CSS is render blocking because rules can be overwritten, so
+            the content can't be rendered until the CSSOM is complete.
+          </li>
+          <li>
+            <strong>Render Tree:</strong> DOM and CSSOM trees are combined into
+            the render tree. The render tree only captures visible content. The
+            head section (generally) doesn't contain any visible information,
+            and is therefore not included in the render tree. If there's a
+            display: none; set on an element, neither it, nor any of its
+            descendants, are in the render tree.
+          </li>
+          <li>
+            <strong>Layout (reflow):</strong> layout step determines where and
+            how the elements are positioned on the page, determining the width
+            and height of each element, and where they are in relation to each
+            other. Layout depends on viewport size, which can change on device
+            rotation. E.g., the
+            <code
+              >&lt;meta name="viewport" content="width=device-width"&gt;</code
+            >
+            tag influences layout width.
+            <br />
+            =&gt; The viewport meta tag defines the width of the layout
+            viewport, impacting the layout. Without it, the browser uses the
+            default viewport width, which on by-default full screen browsers is
+            generally 960px. On by-default full screen browsers, like your
+            phone's browser, by setting
+            <code
+              >&lt;meta name="viewport" content="width=device-width"&gt;</code
+            >, the width will be the width of the device instead of the default
+            viewport width. The device-width changes when a user rotates their
+            phone between landscape and portrait mode. Layout happens every time
+            a device is rotated or browser is otherwise resized.
+          </li>
+          <li>
+            <strong>Paint:</strong> The last step is painting the pixels to the
+            screen. Once the render tree is created and layout occurs, the
+            pixels can be painted to the screen. On load, the entire screen is
+            painted. After that, only impacted areas of the screen will be
+            repainted, as browsers are optimized to repaint the minimum area
+            required. Paint time depends on what kind of updates are being
+            applied to the render tree.
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>
+          Suggestions for building your startup process as asynchronous as
+          possible
+        </h2>
+        <ul>
+          <li>
+            <strong>dns-prefetch</strong>
+            <br />
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/Performance/Guides/dns-prefetch"
+              target="_blank"
+              rel="noopener noreferrer"
+              >https://developer.mozilla.org/en-US/docs/Web/Performance/Guides/dns-prefetch</a
+            >
+            <br />
+            Dns-prefetch is an optimization technique that tells a web browser
+            to resolve the domain name (DNS lookup) of an external resource
+            before that resource is actually needed. This can help reduce
+            latency and speed up page loading.
+            <br /><br />
+            <code
+              >&lt;link rel="dns-prefetch" href="https://fonts.googleapis.com/"
+              /&gt;</code
+            >
+            <br />
+            You should place dns-prefetch hints in the &lt;head&gt; element any
+            time your site references resources on cross-origin domains
+          </li>
+        </ul>
+        <ol>
+          <li>
+            <strong
+              >Use the defer or async attribute on script tags needed by the Web
+              application.</strong
+            >
+            <ul>
+              <li>
+                Normally, when the browser encounters a &lt;script&gt; tag, it
+                stops parsing the HTML and downloads and executes the script
+                before continuing. This can slow down page loading.
+              </li>
+              <li>
+                Using defer tells the browser to download the script but wait to
+                execute it until after the HTML is fully parsed.
+              </li>
+              <li>
+                Using async tells the browser to download and execute the script
+                asynchronously, without blocking HTML parsing, but execution
+                order isn't guaranteed.
+              </li>
+              <li>Both help make page loading smoother and faster.</li>
+            </ul>
+          </li>
+          <li>
+            <strong
+              >If you need to decode asset files (e.g., JPEG files) for things
+              like WebGL, do it in workers.</strong
+            >
+            <ul>
+              <li>
+                Workers run in the background (separate threads) so heavy
+                processing like decoding images doesn't block or slow down the
+                main thread that handles user interaction.
+              </li>
+              <li>This keeps the app responsive and speeds up startup.</li>
+            </ul>
+          </li>
+          <li>
+            <strong
+              >Use browser/device built-in decoders instead of custom
+              ones.</strong
+            >
+            <ul>
+              <li>
+                Browsers have optimized ways to decode images, videos, and other
+                media very fast, often by using hardware acceleration.
+              </li>
+              <li>
+                Using these built-in decoders means faster processing and
+                smaller app size, since you don't need to bundle your own
+                decoder code.
+              </li>
+              <li>
+                The browser can also run these decoding tasks in parallel,
+                speeding things up even more.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <strong>Process data in parallel whenever possible.</strong>
+            <ul>
+              <li>
+                Instead of handling one chunk of data at a time (sequentially),
+                do many chunks at once using parallel processing.
+              </li>
+              <li>
+                This speeds things up because multiple tasks happen
+                simultaneously, reducing the total time.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <strong
+              >Don't include scripts or stylesheets unrelated to the critical
+              rendering path in startup HTML.</strong
+            >
+            <ul>
+              <li>
+                Critical rendering path means the minimal resources needed to
+                display the first view of your page.
+              </li>
+              <li>
+                Loading unnecessary scripts or styles early slows down page
+                startup.
+              </li>
+              <li>
+                Load extra scripts/styles only when they are really needed
+                (e.g., after the page loads or on user interaction).
+              </li>
+            </ul>
+          </li>
+          <li>
+            <strong>Reduce the size of JavaScript files.</strong>
+            <ul>
+              <li>
+                Use minification to remove all unnecessary characters (like
+                spaces and comments) from code.
+              </li>
+              <li>
+                Use compression methods like Gzip or Brotli on the server so
+                browsers receive smaller files, speeding up download time.
+              </li>
+              <li>Smaller files mean faster loads and better performance.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Use resource hints like preconnect or preload.</strong>
+            <ul>
+              <li>
+                These are instructions you give the browser to prepare for
+                important resources early.
+              </li>
+              <li>
+                Preconnect lets the browser set up early connections (DNS
+                lookup, TCP handshake) to important domains, reducing the time
+                to fetch resources later.
+              </li>
+              <li>
+                Preload tells the browser to load specific resources (like
+                fonts, scripts) as soon as possible because they will be needed
+                soon.
+              </li>
+              <li>Both improve resource loading speed and startup time.</li>
+            </ul>
+          </li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>Lazy Loading</h2>
+        <p>
+          Lazy loading is a strategy to identify resources as non-blocking
+          (non-critical) and load these only when needed. It's a way to shorten
+          the length of the critical rendering path, which translates into
+          reduced page load times. Lazy loading can be applied to multiple
+          resources and through multiple strategies.
+        </p>
+        <ul>
+          <li>
+            <strong>Code splitting -</strong> JavaScript, CSS and HTML can be
+            split into smaller chunks. This enables sending the minimal code
+            required to provide value upfront, improving page-load times. The
+            rest can be loaded on demand.
+          </li>
+          <li>
+            <strong>Script type module</strong> - Any script tag with
+            type="module" is treated as a JavaScript module and is deferred by
+            default.
+          </li>
+          <li>
+            <strong>CSS</strong> - By default, CSS is treated as a render
+            blocking resource, so the browser won't render any processed content
+            until the CSSOM is constructed.
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>CSS performance optimization</h2>
+        <a
+          href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Performance/CSS"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Performance/CSS
+        </a>
+        <h3>Optimizing rendering</h3>
+        <ul>
+          <li>Remove unnecessary styles</li>
+          <li>
+            Split CSS into separate modules: split up your CSS into separate
+            files and load only what is needed
+          </li>
+        </ul>
+        <p>
+          <code
+            >&lt;!-- Loading and parsing print.css is not render-blocking
+            --&gt;</code
+          ><br />
+          <code
+            >&lt;link rel="stylesheet" href="print.css" media="print"
+            /&gt;</code
+          ><br />
+          These styles will only be loaded when the document is being printed<br />
+          By default, the browser assumes that each specified style sheet is
+          render-blocking. You can tell the browser when a style sheet should be
+          applied by adding a media attribute. When the browser sees a style
+          sheet that it only needs to apply in a specific scenario, it still
+          downloads the stylesheet, but doesn't render-block.
+        </p>
+        <ul>
+          <li>Minify and compress your CSS:</li>
+          <li>
+            Simplify selectors: complex selectors not only increases file sizes,
+            but also the parsing time for those selectors. Making your selectors
+            less complex and specific is also good for maintenance. It is easy
+            to understand what simple selectors are doing, and it is easy to
+            override styles when needed later on if the selectors are less
+            specific.
+          </li>
+          <li>
+            Don't apply styles to more elements than needed:
+            <pre><code>body * { 
+  font-size: 14px; display: flex; 
+}</code></pre>
+            This kind of styling can impact performance negatively, especially
+            on larger sites. Remember that many properties (such as font-size)
+            inherit their values from their parents, so you don't need to apply
+            them everywhere. And powerful tools such as Flexbox need to be used
+            sparingly. Using them everywhere can cause all kinds of unexpected
+            behavior.
+          </li>
+          <li>Cut down on image HTTP requests with CSS sprites:</li>
+          <li>
+            Preload important assets: You can use rel="preload" to turn
+            &lt;link&gt; elements into preloaders for critical assets. This
+            includes CSS files, fonts, and images
+          </li>
+        </ul>
+        <pre><code>&lt;link rel="preload" href="style.css" as="style" /&gt;</code></pre>
+        <p>
+          With preload, the browser will fetch the referenced resources as soon
+          as possible and make them available in the browser cache so that they
+          will be ready for use sooner when they are referenced in subsequent
+          code.
+        </p>
+      </section>
+
+      <section>
+        <h2>Handling animations</h2>
+        <ul>
+          <li>
+            The simplest advice is to cut down on all unnecessary animations.
+          </li>
+          <li>
+            You could also provide users with a control/site preference to turn
+            off animations if they are using a low-powered device or a mobile
+            device with limited battery power.
+          </li>
+          <li>
+            For essential DOM animations, you are advised to use CSS animations
+            where possible, rather than JavaScript animations
+          </li>
+        </ul>
+        <p>
+          Next, animation performance relies heavily on what properties you are
+          animating. Certain properties, when animated, trigger a reflow (and
+          therefore also a repaint) and should be avoided. Properties include -
+          <code
+            >width, height, border, padding, margin, top, bottom, left, right,
+            align-content, align-items, flex, box-shadow</code
+          >
+        </p>
+        <p>
+          If at all possible, it is better to animate properties that do not
+          cause reflow/repaint - <code>Transforms, opacity, filter</code>
+        </p>
+        <p>
+          To further improve performance, you should consider moving animation
+          work off the main thread and onto the device's GPU. This is done by
+          choosing specific types of animations that the browser will
+          automatically send to the GPU to handle; these include:
+        </p>
+        <ul>
+          <li>
+            3d animations (<code>transform: translateZ()</code> and
+            <code>rotate3d()</code>)
+          </li>
+          <li>
+            Elements with certain other properties animated such as
+            <code>position: fixed</code>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>HTML performance optimization</h2>
+        <ul>
+          <li>
+            Providing different image resolutions via srcset: To provide
+            different resolution versions of the same image depending on the
+            device's resolution and viewport size, you can use the srcset and
+            sizes attributes. This helps with performance because browsers don't
+            load larger images than they need. This leads to optimized page
+            speeds, less wasted bandwidth, smoother user experiences, and better
+            overall resource management on your website.
+          </li>
+          <li>
+            Lazy loading images: Not loading all images immediately when the
+            HTML is rendered, but instead only loading them when they are
+            actually visible to the user in the viewport
+            <br />
+            <code
+              >&lt;img src="800w.jpg" alt="Family portrait" loading="lazy"
+              /&gt;</code
+            >
+          </li>
+          <li>
+            Lazy loading videos: lazy load video content by using the preload
+            attribute.
+            <pre><code>&lt;video controls preload="none" poster="poster.jpg"&gt;
+  &lt;source src="video.webm" type="video/webm" /&gt;
+  &lt;source src="video.mp4" type="video/mp4" /&gt;
+&lt;/video&gt;</code></pre>
+            Giving preload a value of none tells the browser to not preload any
+            of the video data before the user decides to play it, which is
+            obviously good for performance.
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>JS performance optimization</h2>
+        <ul>
+          <li>
+            Remove unused code: All script gets parsed, whether it is used or
+            not; therefore, a quick win to speed up downloads would be to get
+            rid of any functionality not being used
+          </li>
+          <li>
+            Consider built-in browser features: use a feature the browser
+            already has, rather than creating your own via JavaScript
+          </li>
+          <li>Code splitting: Explained under Lazy loading section</li>
+          <li>Minification</li>
+          <li>
+            Preload critical js
+            <pre><code>&lt;head&gt;
+        &lt;link rel="preload" href="important-js.js" as="script" /&gt;
+      &lt;/head&gt;</code></pre>
+            The preload &lt;link&gt; fetches the JavaScript as soon as possible,
+            without blocking rendering. You can then use it wherever you want in
+            your page
+            <pre><code>&lt;script src="important-js.js"&gt;&lt;/script&gt;</code></pre>
+          </li>
+          <li>
+            Deferring execution of non-critical JavaScript: Using async, defer
+            attribute
+            <pre><code>&lt;script async src="main.js"&gt;&lt;/script&gt;</code></pre>
+          </li>
+          <li>
+            Run computation off the main thread: Using web workers, async coding
+          </li>
+          <li>
+            Optimizing event performance: remove event listeners that are no
+            longer needed else it will be a waste of processing power to keeping
+            listening for that event.
+          </li>
+          <li>
+            Reduce DOM manipulation: Accessing and updating the DOM is
+            computationally expensive, so you should minimize the amount that
+            your JavaScript does, especially when performing constant DOM
+            animation
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h2>Some related notes</h2>
+        <ul>
+          <li>CSS is always render blocking, unless loaded with special attributes (media, disabled, etc.)</li>
+          <li>JS without async/defer is parse blocking</li>
+          <li>Render-blocking = blocks everything after DOM creation</li>
+        </ul>
+      
+        <h3>Why is a display:none element still in the DOM but not in the render tree?</h3>
+        <ul>
+          <li>The DOM represents the document structure and is needed for JavaScript, events, and accessibility, so hidden elements remain there.</li>
+          <li>The render tree is built for layout and painting only, so it excludes elements that don’t affect the visual output, like display:none.</li>
+        </ul>
+      
+        <h3>Without defer (Normal Script)</h3>
+        <ul>
+          <li>The browser parses the HTML from top to bottom.</li>
+          <li>When it encounters a &lt;script&gt; tag without defer:</li>
+          <li>Parsing of the HTML pauses.</li>
+          <li>The browser immediately downloads (if not already cached) and executes the script.</li>
+          <li>Only after the script finishes executing does the browser resume HTML parsing.</li>
+          <li>This means the script blocks the rendering of the page until it's executed.</li>
+        </ul>
+      
+        <h3>With defer</h3>
+        <ul>
+          <li>The browser parses the HTML from top to bottom.</li>
+          <li>When it encounters a &lt;script&gt; tag with defer:</li>
+          <li>The script is downloaded in parallel with HTML parsing (doesn't block parsing).</li>
+          <li>The script execution is deferred until after the entire HTML has been parsed.</li>
+          <li>Deferred scripts are executed in the order they appear in the document before the DOMContentLoaded event fires.</li>
+          <li>This leads to non-blocking behavior and often better performance.</li>
+        </ul>
+      </section>
+      
+    </article>
+  </body>
+</html>
