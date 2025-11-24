@@ -81,6 +81,11 @@
           asynchronous execution as soon as the script is downloaded, and <code>defer</code> delays execution until 
           after the whole document has been parsed.)
         </p>
+        <p>
+          A preloader is like a parser that scans the HTML file while the main parser is processing the HTML code.
+          Its role is to look for resources like stylesheets, scripts, or images (that also need to be retrieved from a server)
+          and request them. Hopefully, by the time the HTML is parsed, those resources are already downloaded and ready to be processed.
+        </p>
       </section>
 
       <section>
