@@ -61,24 +61,25 @@
       <section>
         <h2>Parsing</h2>
         <p>
-          Once the browser receives the first chunk of data, it can begin
-          parsing the information received. Parsing means analyzing and converting
-          a program into an internal format that a runtime environment can actually run.
-          The parsing will be done by the browser engine (not to be confused 
-          with the the Javascript engine of the browser).
-          Some browser engines - Gecko (by Mozilla for Firefox), WebKit (by Apple for Safari), 
-          Blink (by Google for Chrome)
+          Once the browser receives the first chunk of data, it can begin parsing the information received.
+          Parsing means analyzing and converting a program into an internal format that a runtime environment can actually run.
+          The parsing is done by the <strong>browser engine</strong> (not to be confused with the <strong>JavaScript engine</strong>
+          of the browser). Some popular browser engines are <em>Gecko</em> (by Mozilla for Firefox), <em>WebKit</em> (by Apple for Safari), 
+          and <em>Blink</em> (by Google for Chrome).
         </p>
         <p>
-          The parser works line by line, from top to bottom. When the parser will encounter non-blocking
-          resources (for example images), the browser will request those images from the server and 
-          continue parsing. On the other hand, if it encounters blocking-resources (CSS stylesheets, Javascrpt
-          files added in the <head> section of the HTML or fonts added from a CDN ), the parser will stop
-            execution until all those blocking resources are downloaded. That's why, if yu're working
-            with Javascript it is recommended to add your `<script>` tags at the end of the HTML file,
-  or if you want to keep them in the <head> tag, you should add to them the defer or async attribute
-  (async allows for asynchronous as soon as the script is downloaded and defer allows execution only
-  after the whole document has been parsed.).
+          The parser works line by line, from top to bottom. When the parser encounters non-blocking resources (for example, images),
+          the browser will request those images from the server and continue parsing. 
+          On the other hand, if it encounters blocking resources (CSS stylesheets, JavaScript files added in the <code>&lt;head&gt;</code> 
+          section of the HTML, or fonts loaded from a CDN),
+          the parser will stop execution until all those blocking resources are downloaded.
+        </p>
+        <p>
+          That's why, if you're working with JavaScript, it is recommended to add your <code>&lt;script&gt;</code> 
+          tags at the end of the HTML file. Alternatively, if you want to keep them in the <code>&lt;head&gt;</code> tag,
+          you should add to them the <code>defer</code> or <code>async</code> attribute. (<code>async</code> allows for 
+          asynchronous execution as soon as the script is downloaded, and <code>defer</code> delays execution until 
+          after the whole document has been parsed.)
         </p>
       </section>
 
