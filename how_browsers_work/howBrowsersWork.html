@@ -69,6 +69,17 @@
           Some browser engines - Gecko (by Mozilla for Firefox), WebKit (by Apple for Safari), 
           Blink (by Google for Chrome)
         </p>
+        <p>
+          The parser works line by line, from top to bottom. When the parser will encounter non-blocking
+          resources (for example images), the browser will request those images from the server and 
+          continue parsing. On the other hand, if it encounters blocking-resources (CSS stylesheets, Javascrpt
+          files added in the <head> section of the HTML or fonts added from a CDN ), the parser will stop
+            execution until all those blocking resources are downloaded. That's why, if yu're working
+            with Javascript it is recommended to add your `<script>` tags at the end of the HTML file,
+  or if you want to keep them in the <head> tag, you should add to them the defer or async attribute
+  (async allows for asynchronous as soon as the script is downloaded and defer allows execution only
+  after the whole document has been parsed.).
+        </p>
       </section>
 
       <section>
