@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GitHub Actions Overview</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+      line-height: 1.6;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #24292e;
+    }
+    p {
+      font-size: 1.1em;
+      margin-bottom: 20px;
+    }
+    h2 {
+      color: #0366d6;
+      border-bottom: 2px solid #0366d6;
+      padding-bottom: 6px;
+      margin-bottom: 15px;
+    }
+    ul {
+      list-style-type: disc;
+      padding-left: 20px;
+      margin-bottom: 30px;
+    }
+    li {
+      margin-bottom: 15px;
+    }
+    code {
+      background-color: #eaeaea;
+      padding: 0 4px;
+      border-radius: 3px;
+      font-family: "Courier New", Courier, monospace;
+    }
+  </style>
+</head>
+<body>
+  <h1>GitHub Actions Overview</h1>
+  <p>
+    GitHub Actions is a continuous integration and continuous delivery (CI/CD) platform integrated directly into GitHub. 
+    It enables the automation of software development workflows, including building, testing, and deploying code.
+  </p>
+  <h2>Key Concepts:</h2>
+  <ul>
+    <li>
+      <strong>Workflows:</strong> Automated processes defined in YAML files within the <code>.github/workflows</code> 
+      directory of a repository. They are triggered by specific events, such as a push to a branch, a pull request, or a scheduled time.
+    </li>
+    <li>
+      <strong>Events:</strong> Actions are triggered by events occurring in a repository. Examples include <code>push</code>, 
+      <code>pull_request</code>, <code>issue_comment</code>, or <code>schedule</code>.
+    </li>
+    <li>
+      <strong>Jobs:</strong> A set of steps that execute on the same runner (a virtual machine or container). 
+      Jobs can run in parallel or sequentially and can have dependencies on other jobs.
+    </li>
+    <li>
+      <strong>Steps:</strong> Individual tasks within a job. A step can be a shell script or an action.
+    </li>
+    <li>
+      <strong>Actions:</strong> Reusable units of code that perform a specific task. They can be custom-created, 
+      found on the GitHub Marketplace, or provided by GitHub. Actions can be written in JavaScript or packaged as Docker containers.
+    </li>
+    <li>
+      <strong>Runners:</strong> The environments where jobs execute. GitHub-hosted runners provide a variety of 
+      operating systems and software, while self-hosted runners allow for custom environments.
+    </li>
+  </ul>
+</body>
+</html>
