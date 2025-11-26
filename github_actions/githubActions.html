@@ -76,5 +76,22 @@
       operating systems and software, while self-hosted runners allow for custom environments.
     </li>
   </ul>
+
+  <h2>Job Execution and Dependencies</h2>
+  <p>
+    By default, if you define multiple jobs in a GitHub Actions workflow, and they do not have explicit dependencies on each other using the 
+    <code>needs</code> keyword, they will run in parallel.
+  </p>
+  <p>
+    Each job will execute on its own runner (either GitHub-hosted or self-hosted) and independently of other jobs in the workflow.
+  </p>
+
+  <h2>Matrix Strategy for Parallel Job Variations</h2>
+  <p>
+    The <code>strategy.matrix</code> feature allows you to run the same job multiple times, each with a different set of input variables. 
+    This effectively creates multiple parallel
+
+
+
 </body>
 </html>
