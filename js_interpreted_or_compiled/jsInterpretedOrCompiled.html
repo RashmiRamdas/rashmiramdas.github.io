@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JavaScript Engine: Interpreter & JIT Compiler</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 720px;
+      margin: 40px auto;
+      line-height: 1.6;
+      color: #333;
+      padding: 0 20px;
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    section {
+      margin-bottom: 24px;
+    }
+    strong {
+      color: #2980b9;
+    }
+    a {
+      color: #2980b9;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>JavaScript Engine: Interpreter & JIT Compiler</h1>
+
+  <section>
+    <p>
+      <strong>Interpreter:</strong> Traditionally, JS engines started by interpreting JavaScript code,
+      meaning they executed the code line-by-line or statement-by-statement without compiling it
+      fully ahead of time. This allows for quick startup and immediate execution but can be
+      inefficient for code that runs repeatedly.
+    </p>
+  </section>
+
+  <section>
+    <p>
+      <strong>JIT Compiler:</strong> Modern JS engines (like V8 in Chrome, SpiderMonkey in Firefox,
+      or JavaScriptCore in Safari) use JIT compilation to improve performance. They start by
+      interpreting the code but monitor which parts of the code run repeatedly (such as inside loops).
+      Those frequently executed parts are then compiled into optimized machine code at runtime.
+      This avoids repeatedly interpreting the same code and speeds up execution significantly
+      by running compiled code for repeated operations.
+    </p>
+  </section>
+
+  <section>
+    <p>
+      In-depth explanation of how Just-In-Time (JIT) compilers work in JavaScript engines,
+      including the concepts of monitoring code execution, baseline compilation, and advanced optimization,
+      you can read the detailed article at
+      <a href="https://hacks.mozilla.org/2017/02/a-crash-course-in-just-in-time-jit-compilers/" target="_blank" rel="noopener noreferrer">
+        A Crash Course in Just-In-Time (JIT) Compilers
+      </a> 
+    </p>
+  </section>
+</body>
+</html>
