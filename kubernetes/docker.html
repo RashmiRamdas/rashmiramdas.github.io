@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Docker Notes and Commands</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+      line-height: 1.6;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #24292e;
+      margin-bottom: 20px;
+    }
+    h2 {
+      color: #0366d6;
+      border-bottom: 2px solid #0366d6;
+      padding-bottom: 6px;
+      margin-bottom: 15px;
+      margin-top: 40px;
+    }
+    p {
+      font-size: 1.1em;
+      margin-bottom: 20px;
+    }
+    ul, ol {
+      padding-left: 20px;
+      margin-bottom: 30px;
+    }
+    li {
+      margin-bottom: 12px;
+    }
+    code {
+      background-color: #eaeaea;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 0.95em;
+    }
+    pre {
+      background-color: #eaeaea;
+      padding: 10px 15px;
+      border-radius: 4px;
+      overflow-x: auto;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 0.95em;
+      margin-bottom: 30px;
+    }
+    strong {
+      color: #24292e;
+    }
+  </style>
+</head>
+<body>
+  <h1>Docker Notes and Commands</h1>
+
+  <h2>Docker Overview</h2>
+  <ul>
+    <li>Docker carves up a computer into sealed containers that run our code.</li>
+    <li><strong>Container</strong> is a self-contained sealed unit of software:
+      <ul>
+        <li>Contains everything required to run the code.</li>
+        <li>Includes batteries and OS.</li>
+        <li>Includes code, configs, processes, dependencies, OS.</li>
+        <li>Is a client program named <code>docker</code>.</li>
+        <li>Server program that manages Linux system.</li>
+        <li>Program that builds containers from code.</li>
+        <li>Service that distributes containers.</li>
+      </ul>
+    </li>
+    <li>Docker containers are sealed, self-contained units of software that have everything needed to run a service.</li>
+    <li>Docker's primary job is to manage a Linux server and start and stop your container on it as required.</li>
+    <li>An image is every file that makes up just enough of the OS to do what you need to do.</li>
+    <li><code>docker run</code> command takes an image and turns it into a living running container with a process in it that’s doing something.</li>
+    <li>Images never change (if we create a file in ubuntu image container, that file will be available in that container and not in the image itself).</li>
+    <li>An image is a read-only template with instructions for creating a Docker container.</li>
+    <li>A container is a runnable instance of an image.</li>
+  </ul>
+
+  <h2>Common Docker Commands</h2>
+  <ul>
+    <li><code>docker version</code></li>
+    <li><code>docker info</code> — gives Docker info</li>
+    <li><code>docker run hello-world</code> — to start a container</li>
+    <li><code>docker images</code> — lists Docker images</li>
+    <li><code>-ti</code> — terminal interactive</li>
+    <li><code>docker run -ti ubuntu:latest bash</code> — example: running bash on Ubuntu image</li>
+    <li><code>docker ps</code> — lists running containers</li>
+    <li><code>docker ps -a</code> — lists all containers</li>
+    <li><code>docker ps -l</code> — lists last exited container</li>
+    <li><code>docker commit &lt;container_id&gt;</code> — create new image from container (useful after changes to original image)</li>
+    <pre><code>C:\WINDOWS\system32&gt;docker commit d0fa6e3665fd
+sha256:446f1919f92d6a1691ea971bbfe27dd6c15b0fb7ca2a7abe5c5ed14c710ff3ad
+</code></pre>
+    <li><code>docker tag &lt;image_id&gt;</code> — add name to image (image_id is everything after colon (:))</li>
+    <pre><code>C:\WINDOWS\system32&gt;docker tag 446f1919f92d6a1691ea971bbfe27dd6c15b0fb7ca2a7abe5c5ed14c710ff3ad my-image
+</code></pre>
+    <li><code>docker commit &lt;container_name&gt; &lt;image_name&gt;</code> — combination of commit and tag; creates new named image from container</li>
+    <li><code>docker run --rm ubuntu</code> — deletes the container on exit (<code>--rm</code>)</li>
+    <li><code>docker run -ti ubuntu bash -c "sleep 3; echo all done"</code> — example running multiple commands in container</li>
+    <li><strong>Detached containers</strong> — start container and leave running with <code>-d</code> option:
+      <pre><code>docker run -ti -d ubuntu bash</code></pre>
+    </li>
+    <li>Attach to running container:
+      <pre><code>docker ps
+docker attach &lt;container_name&gt;</code></pre>
+    </li>
+    <li>Detach but keep running: press <code>Ctrl+P</code>, <code>Ctrl+Q</code></li>
+    <li>Start new process on same container (like multiple terminals):
+      <pre><code>docker exec -ti &lt;container_name&gt; bash</code></pre>
+    </li>
+    <li>Name a container with <code>--name &lt;container_name&gt;</code> in <code>docker run</code> command</li>
+    <li><code>docker logs &lt;container_name&gt;</code> — view logs</li>
+    <li><code>docker kill &lt;container_name&gt;</code> — kill container</li>
+    <li><code>docker rm &lt;container_name&gt;</code> — delete container</li>
+    <li>Limit memory: <code>docker run --memory &lt;max_allowed_memory&gt; &lt;image_name&gt;</code></li>
+    <li>Limit CPU shares relative to others: <code>docker run --cpu-shares &lt;value&gt; &lt;image_name&gt;</code></li>
+    <li>Limit CPU quota: <code>docker run --cpu-quota &lt;value&gt; &lt;image_name&gt;</code></li>
+    <li><code>docker network ls</code> — list docker networks</li>
+  </ul>
+
+  <h2>Building and Managing Images</h2>
+  <ul>
+    <li>Create image from Dockerfile:
+      <pre><code>docker build -t &lt;image_name&gt; .</code></pre>
+      <small>(dot <code>.</code> means current directory of Dockerfile)</small>
+    </li>
+    <li>Delete image:
+      <pre><code>docker rmi &lt;image_id&gt;</code></pre>
+    </li>
+  </ul>
+
+  <h2>Volumes (Like Shared Folders)</h2>
+  <ul>
+    <li>Used to share data between containers or between containers and host</li>
+    <li>Mechanism to map Docker container file system to host file system</li>
+    <li>Types of Docker volume: Named volume, bind mount</li>
+  </ul>
+
+  <h2>Docker Registries</h2>
+  <ul>
+    <li>Registries manage and distribute images — Docker images are retrieved from and published through registries</li>
+    <li>Find images with:
+      <pre><code>docker search &lt;keyword_or_image_name&gt;</code></pre>
+    </li>
+  </ul>
+
+  <h2>Image Tagging and Overwriting</h2>
+  <p>Images in Docker have tags, which are references to images. Multiple tags may refer to the same image.</p>
+  <p>If you reassign a tag that is already in use, the original image loses that tag but still exists (accessible by image ID or other tags).</p>
+
+  <h2>Using Multiple Dockerfiles</h2>
+  <p>Example command to build image with a different Dockerfile name:</p>
+  <pre><code>docker build -f Dockerfile.db .</code></pre>
+  <p>Reference: <a href="https://stackoverflow.com/questions/27409761/docker-multiple-dockerfiles-in-project" target="_blank" rel="noopener noreferrer">Stack Overflow - Docker multiple Dockerfiles in project</a></p>
+
+  <h2>Sharing Docker Images</h2>
+  <p>Save image to tar file:</p>
+  <pre><code>docker save ubuntu > ubuntu.tar</code></pre>
+  <p>This saves <code>ubuntu.tar</code> in the current directory.</p>
+  <p>If it refuses to save to terminal, use <code>-o</code> flag or redirect:</p>
+  <pre><code>docker save -o ~/Documents/image_name.tar image_name</code></pre>
+  <p>Load (unzip) a tar file back into Docker:</p>
+  <pre><code>docker load &lt; ubuntu.tar</code></pre>
+
+  <h2>Additional Notes</h2>
+  <ul>
+    <li><strong>Hyper-V:</strong> Microsoft Hyper-V is a native hypervisor. A hypervisor allows one host computer to support multiple guest virtual machines.</li>
+    <li><strong>WSL 2 (Windows Subsystem for Linux 2):</strong> <a href="https://www.youtube.com/watch?v=_fntjriRe48" target="_blank" rel="noopener noreferrer">Introduction video link</a></li>
+  </ul>
+
+  <h2>Example Mount Command</h2>
+  <pre><code>docker run -ti --mount src="$(pwd)",target=/usr/src/app,type=bind --name droplets-container20 droplets-image-badge-visual bash</code></pre>
+  
+</body>
+</html>
