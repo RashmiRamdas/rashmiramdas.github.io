@@ -193,5 +193,32 @@
       </tr>
     </tbody>
   </table>
+
+  <h2>Nodes and Running Containers in Kubernetes</h2>
+  <p><strong>Nodes</strong> are machines or virtual machines (VMs) that the cluster is made of, actually running our containers.</p>
+  <p>The <strong>master node(s)</strong> run the software that controls the cluster. They are sometimes called the <em>control plane</em> and run the Kubernetes software itself.</p>
+  <p>The <strong>worker nodes</strong> are where our containers run — the services we write and deploy.</p>
+  
+  <p>To run a container in a cluster:</p>
+  <pre><code>kubectl run --image=nginx web</code></pre>
+  <p>(Note: it is a double hyphen before <code>image</code>. Here, <code>web</code> is the name given to the pod.)</p>
+  <p>Output: <code>pod/web created</code></p>
+  
+  <p>Container isn't a word we use directly when talking to Kubernetes. What we run is a wrapper called a <strong>pod</strong>. Think of pods as containers with additional features.</p>
+  
+  <p>To see the pods created:</p>
+  <pre><code>kubectl get pods
+  kubectl describe pod web</code></pre>
+  <p>(The second command gives more details about the pod named <code>web</code>.)</p>
+  
+  <p><strong>Kubectl commands like <code>run</code></strong> directly tell the cluster what to do and are called <em>imperative commands</em>. One problem with imperative commands is that they are fragile. For example, if the pod crashes, you would have to manually notice this and run another pod, causing downtime.</p>
+  
+  <p>Kubernetes is a <em>declarative system</em>. Instead of telling it one-off commands like <code>run</code>, you declare the desired state of the system — for instance, "there should always be an nginx pod running." Kubernetes takes care of selecting nodes, running the container, and restarting it if it crashes. This is done via a YAML file.</p>
+  
+  <p>To deploy declaratively, you use the <code>apply</code> command:</p>
+  <pre><code>kubectl apply -f web-declarative.yaml</code></pre>
+  <p>(The <code>-f</code> flag specifies the filename. In this example, <code>web-declarative.yaml</code> is the file.)</p>
+  <p>Output: <code>pod/web-declarative created</code></p>
+
 </body>
 </html>
