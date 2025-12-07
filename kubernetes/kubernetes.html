@@ -207,8 +207,8 @@
   <p>Container isn't a word we use directly when talking to Kubernetes. What we run is a wrapper called a <strong>pod</strong>. Think of pods as containers with additional features.</p>
   
   <p>To see the pods created:</p>
-  <pre><code>kubectl get pods
-  kubectl describe pod web</code></pre>
+  <pre><code>kubectl get pods</code>
+  <code>kubectl describe pod web</code></pre>
   <p>(The second command gives more details about the pod named <code>web</code>.)</p>
   
   <p><strong>Kubectl commands like <code>run</code></strong> directly tell the cluster what to do and are called <em>imperative commands</em>. One problem with imperative commands is that they are fragile. For example, if the pod crashes, you would have to manually notice this and run another pod, causing downtime.</p>
