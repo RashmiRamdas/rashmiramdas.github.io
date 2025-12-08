@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -14,98 +15,137 @@
       background-color: #f9f9f9;
       color: #333;
     }
+
     h1 {
       text-align: center;
       color: #24292e;
     }
+
     h2 {
       color: #0366d6;
       border-bottom: 2px solid #0366d6;
       padding-bottom: 6px;
       margin-bottom: 15px;
     }
+
     p {
       font-size: 1.1em;
       margin-bottom: 20px;
     }
+
     ul {
       list-style-type: disc;
       padding-left: 20px;
       margin-bottom: 30px;
     }
+
     ol {
       padding-left: 20px;
       margin-bottom: 30px;
     }
+
     li {
       margin-bottom: 15px;
     }
+
     code {
       background-color: #eaeaea;
       padding: 0 4px;
       border-radius: 3px;
       font-family: "Courier New", Courier, monospace;
     }
+
     table {
       width: 100%;
       border-collapse: collapse;
       margin-bottom: 40px;
     }
-    th, td {
+
+    th,
+    td {
       border: 1px solid #ddd;
       padding: 10px;
       vertical-align: top;
       text-align: left;
     }
+
     th {
       background-color: #0366d6;
       color: white;
     }
+
     .general-terms {
       list-style-type: disc;
       padding-left: 20px;
       margin-bottom: 30px;
     }
+
     .general-terms li {
       margin-bottom: 15px;
     }
   </style>
 </head>
+
 <body>
   <h1>Kubernetes</h1>
   <p>It is container orchestration system..</p>
 
   <p><strong>General Terminologies</strong></p>
   <ul class="general-terms">
-    <li><strong>Cloud:</strong> Refers to remote servers that store, manage, and process data and applications over the internet, rather than on a personal computer’s hard drive. Cloud services are categorized mainly into three types: Software as a Service (SaaS), Platform as a Service (PaaS), and Infrastructure as a Service (IaaS).</li>
-    <li><strong>On-Premises (On-Prem):</strong> Before cloud computing became widespread, organizations relied on on-premises infrastructure—physically purchasing, housing, and managing their own hardware and software, typically within dedicated data centers located in their own facilities.</li>
-    <li><strong>Cloud Provider:</strong> A company that delivers computing resources such as servers, storage, and software over the internet on a pay-as-you-go basis. This allows businesses to rent resources instead of maintaining physical hardware. Key examples include Amazon Web Services (AWS), Microsoft Azure, and Google Cloud Platform (GCP).</li>
-    <li><strong>Kubernetes:</strong> An open-source, vendor-neutral platform for container orchestration that automates the deployment, scaling, and management of containerized applications. Initially designed by Google, Kubernetes is now maintained by the Cloud Native Computing Foundation (CNCF). Cloud providers like AWS also offer their proprietary container orchestration services, such as Amazon ECS and Amazon EKS (a managed Kubernetes service).</li>
+    <li><strong>Cloud:</strong> Refers to remote servers that store, manage, and process data and applications over the
+      internet, rather than on a personal computer’s hard drive. Cloud services are categorized mainly into three types:
+      Software as a Service (SaaS), Platform as a Service (PaaS), and Infrastructure as a Service (IaaS).</li>
+    <li><strong>On-Premises (On-Prem):</strong> Before cloud computing became widespread, organizations relied on
+      on-premises infrastructure—physically purchasing, housing, and managing their own hardware and software, typically
+      within dedicated data centers located in their own facilities.</li>
+    <li><strong>Cloud Provider:</strong> A company that delivers computing resources such as servers, storage, and
+      software over the internet on a pay-as-you-go basis. This allows businesses to rent resources instead of
+      maintaining physical hardware. Key examples include Amazon Web Services (AWS), Microsoft Azure, and Google Cloud
+      Platform (GCP).</li>
+    <li><strong>Kubernetes:</strong> An open-source, vendor-neutral platform for container orchestration that automates
+      the deployment, scaling, and management of containerized applications. Initially designed by Google, Kubernetes is
+      now maintained by the Cloud Native Computing Foundation (CNCF). Cloud providers like AWS also offer their
+      proprietary container orchestration services, such as Amazon ECS and Amazon EKS (a managed Kubernetes service).
+    </li>
   </ul>
 
   <h2>Containers</h2>
-  <p>A technology that bundles code for an application and the configuration required to run the code itself in one unit</p>
-  <p>Before container technology, different servers or virtual machines were required to run each instance of an application. Building your applications using containers has several advantages.</p>
+  <p>A technology that bundles code for an application and the configuration required to run the code itself in one unit
+  </p>
+  <p>Before container technology, different servers or virtual machines were required to run each instance of an
+    application. Building your applications using containers has several advantages.</p>
   <ol>
-    <li><strong>Portable</strong> - containers are portable and can be run on any Linux, Windows or macOS machine as long as there is a container engine installed.</li>
-    <li><strong>Use less CPUs and memory, saving money</strong> - containers use less CPU and memory than a virtual machine or an application running on a server, so you can put more containers on a fewer servers saving you or your company money.</li>
-    <li><strong>Self-contained, can be spun up or down in seconds</strong> - because containers have everything they need to run , its own OS, code, and code dependencies, you can create an image and spin or spin down a container in seconds</li>
-    <li><strong>Quick replications and elastically scale up or down</strong> - it’s possible to create replicas of a container quickly and elastically scale up or down the number of replicas you need.</li>
+    <li><strong>Portable</strong> - containers are portable and can be run on any Linux, Windows or macOS machine as
+      long as there is a container engine installed.</li>
+    <li><strong>Use less CPUs and memory, saving money</strong> - containers use less CPU and memory than a virtual
+      machine or an application running on a server, so you can put more containers on a fewer servers saving you or
+      your company money.</li>
+    <li><strong>Self-contained, can be spun up or down in seconds</strong> - because containers have everything they
+      need to run , its own OS, code, and code dependencies, you can create an image and spin or spin down a container
+      in seconds</li>
+    <li><strong>Quick replications and elastically scale up or down</strong> - it’s possible to create replicas of a
+      container quickly and elastically scale up or down the number of replicas you need.</li>
   </ol>
 
   <h3>Terms:</h3>
   <ul>
     <li><strong>Image:</strong> a container image is a file with executable code that can be run as a container.</li>
-    <li><strong>Container registry</strong> - a database that stores container images, these images can be available to the public or private for those people or service accounts with permission. Some examples of managed container registries are Docker Hub, Quay, Google Container Registry.</li>
+    <li><strong>Container registry</strong> - a database that stores container images, these images can be available to
+      the public or private for those people or service accounts with permission. Some examples of managed container
+      registries are Docker Hub, Quay, Google Container Registry.</li>
   </ul>
 
   <h2>Cloud Native, defn by CNCF.io (Cloud Native computing foundation)</h2>
-  <p>Cloud Native technologies empower organisations to build and run scalable applications in modern, dynamic environments such as public, private and hybrid clouds. Containers, service meshes, microservices, immutable infrastructure and declarative APIs exemplify this approach.</p>
-  <p><strong>Simpler version</strong> - Cloud-native technologies are open-source projects designed to let technologists use cloud computing services to automatically deploy and scale applications.</p>
+  <p>Cloud Native technologies empower organisations to build and run scalable applications in modern, dynamic
+    environments such as public, private and hybrid clouds. Containers, service meshes, microservices, immutable
+    infrastructure and declarative APIs exemplify this approach.</p>
+  <p><strong>Simpler version</strong> - Cloud-native technologies are open-source projects designed to let technologists
+    use cloud computing services to automatically deploy and scale applications.</p>
 
   <h2>Minikube</h2>
   <p>Minikube is a software that lets you run a Kubernetes cluster using just your computer</p>
-  <p>It’s a tool to help you learn Kubernetes. It is free. It is not fit for production clusters because it lacks security and network capabilities offered by cloud providers.</p>
+  <p>It’s a tool to help you learn Kubernetes. It is free. It is not fit for production clusters because it lacks
+    security and network capabilities offered by cloud providers.</p>
   <ul>
     <li><code>minikube start</code> =&gt; create cluster with Minikube</li>
     <li><code>kubectl get nodes</code></li>
@@ -113,20 +153,28 @@
     <li><code>minikube stop</code></li>
     <li><code>minikube delete</code></li>
   </ul>
-  <p>Minikube command helps you create a cluster from scratch, whereas kubectl lets you interact with your cluster. In future, when you spin up a cluster using a cloud provider like AWS, azure or gcp, you’ll use their command line tool to generate the cluster and kubectl for rest of your actions.</p>
+  <p>Minikube command helps you create a cluster from scratch, whereas kubectl lets you interact with your cluster. In
+    future, when you spin up a cluster using a cloud provider like AWS, azure or gcp, you’ll use their command line tool
+    to generate the cluster and kubectl for rest of your actions.</p>
 
   <ul>
     <li><code>kubectl cluster-info</code></li>
     <li><code>kubectl get nodes</code></li>
-    <li><code>kubectl get namespaces</code> =&gt; namespaces are a way to isolate and manage applications and services that you want to remain second</li>
-    <li><code>kubectl get pods -A</code> =&gt; Pods and services that are installed when you spin up a Minikube cluster. -A means you want to see pods in every namespace. These pods are how containers are run in Kubernetes. These pods are also the software required to run a  Kubernetes cluster itself</li>
-    <li><code>kubectl get services -A</code> =&gt; Services that are run in this cluster. Services act as load balancers within the cluster and direct traffic to pods.</li>
+    <li><code>kubectl get namespaces</code> =&gt; namespaces are a way to isolate and manage applications and services
+      that you want to remain second</li>
+    <li><code>kubectl get pods -A</code> =&gt; Pods and services that are installed when you spin up a Minikube cluster.
+      -A means you want to see pods in every namespace. These pods are how containers are run in Kubernetes. These pods
+      are also the software required to run a Kubernetes cluster itself</li>
+    <li><code>kubectl get services -A</code> =&gt; Services that are run in this cluster. Services act as load balancers
+      within the cluster and direct traffic to pods.</li>
   </ul>
 
   <h2>Terms often paired with Kubernetes</h2>
   <h3>Infrastructure as Code (IaC)</h3>
   <h3>GitOps</h3>
-  <p>In Kubernetes, setting up your infrastructure with code and preparing yourself to deploy changes through a GitOps workflow require that you can save the desired state of your cluster in a set of files that you manage with a source control system like Git. In Kubernetes, the most commonly used format for these files are YAML manifests.</p>
+  <p>In Kubernetes, setting up your infrastructure with code and preparing yourself to deploy changes through a GitOps
+    workflow require that you can save the desired state of your cluster in a set of files that you manage with a source
+    control system like Git. In Kubernetes, the most commonly used format for these files are YAML manifests.</p>
   <p>To run YAML manifest,</p>
   <pre><code>kubectl apply -f &lt;yaml-file-name&gt;</code></pre>
   <p>To delete created namespaces</p>
@@ -134,25 +182,37 @@
 
   <h2>Vocabulary</h2>
   <p><strong>Cluster</strong> - instance of Kubernetes. Each cluster has control plane and at least one worker node.</p>
-  <p>If Kubernetes is like an airport, the control pane is like the air traffic control tower with people overlooking the cluster and making sure nodes and pods are created, modified, and deleted without any issues. </p>
+  <p>If Kubernetes is like an airport, the control pane is like the air traffic control tower with people overlooking
+    the cluster and making sure nodes and pods are created, modified, and deleted without any issues. </p>
 
 
   <h2>Additional Kubernetes Concepts</h2>
   <ol>
     <li><strong>Cluster (The entire system)</strong><br />
-      The Cluster is the complete set of machines, components, and resources that Kubernetes manages. It's the highest level of organization. It is comprised of a control plane (the "brain") and the worker nodes (the machines that run applications). 
+      The Cluster is the complete set of machines, components, and resources that Kubernetes manages. It's the highest
+      level of organization. It is comprised of a control plane (the "brain") and the worker nodes (the machines that
+      run applications). 
     </li>
     <li><strong>Node (The physical/virtual machines)</strong><br />
-      Nodes are the actual physical or virtual machines that provide the computing power (CPU, memory, storage) within the cluster. The control plane manages these Nodes and assigns work to them. 
+      Nodes are the actual physical or virtual machines that provide the computing power (CPU, memory, storage) within
+      the cluster. The control plane manages these Nodes and assigns work to them. 
     </li>
     <li><strong>Namespace (The logical partitions)</strong><br />
-      Namespaces are a way to organize and isolate resources within a single cluster. They create "virtual clusters" for different teams, projects, or environments (e.g., development, staging, production). Most Kubernetes resources (Pods, Services, etc.) belong to a specific namespace, but Nodes and PersistentVolumes exist outside of any specific namespace and are visible cluster-wide. 
+      Namespaces are a way to organize and isolate resources within a single cluster. They create "virtual clusters" for
+      different teams, projects, or environments (e.g., development, staging, production). Most Kubernetes resources
+      (Pods, Services, etc.) belong to a specific namespace, but Nodes and PersistentVolumes exist outside of any
+      specific namespace and are visible cluster-wide. 
     </li>
     <li><strong>Pods (The application unit)</strong><br />
-      Pods are the smallest deployable units in Kubernetes. They are a wrapper around one or more containers and are always scheduled to run on a single Node. Pods are ephemeral and share an IP address and resources, allowing containers within the same Pod to communicate via localhost. 
+      Pods are the smallest deployable units in Kubernetes. They are a wrapper around one or more containers and are
+      always scheduled to run on a single Node. Pods are ephemeral and share an IP address and resources, allowing
+      containers within the same Pod to communicate via localhost. 
     </li>
     <li><strong>Service (The stable network endpoint)</strong><br />
-      A Service is an abstraction that defines a stable, persistent way to access a set of Pods. Services provide a stable IP address and DNS name that route traffic to the correct backend Pods, even as those Pods are created, destroyed, or moved between Nodes. Services use labels and selectors to automatically find which Pods they should forward traffic to.
+      A Service is an abstraction that defines a stable, persistent way to access a set of Pods. Services provide a
+      stable IP address and DNS name that route traffic to the correct backend Pods, even as those Pods are created,
+      destroyed, or moved between Nodes. Services use labels and selectors to automatically find which Pods they should
+      forward traffic to.
     </li>
   </ol>
 
@@ -169,56 +229,134 @@
       <tr>
         <td>Cluster</td>
         <td>The entire shipping company</td>
-        <td>The entire operation: the headquarters (control plane), the warehouses (nodes), the trucks, and all the processes that make it run.</td>
+        <td>The entire operation: the headquarters (control plane), the warehouses (nodes), the trucks, and all the
+          processes that make it run.</td>
       </tr>
       <tr>
         <td>Node</td>
         <td>A Warehouse or Distribution Center</td>
-        <td>The physical locations (machines) where goods (containers/pods) are actually stored, moved, and processed. They provide the physical space and power.</td>
+        <td>The physical locations (machines) where goods (containers/pods) are actually stored, moved, and processed.
+          They provide the physical space and power.</td>
       </tr>
       <tr>
         <td>Namespace</td>
         <td>A specific department or floor in the HQ/warehouse</td>
-        <td>A way to logically separate operations (e.g., "North American Orders" vs. "European Orders") so that teams don't interfere with each other, sharing the same physical building but operating independently.</td>
+        <td>A way to logically separate operations (e.g., "North American Orders" vs. "European Orders") so that teams
+          don't interfere with each other, sharing the same physical building but operating independently.</td>
       </tr>
       <tr>
         <td>Pod</td>
         <td>A single Pallet of Cargo/Goods</td>
-        <td>The smallest unit that can be handled and moved. A pallet (Pod) holds the actual items (containers) you want to ship/run. A whole pallet is moved onto a truck (scheduled onto a Node).</td>
+        <td>The smallest unit that can be handled and moved. A pallet (Pod) holds the actual items (containers) you want
+          to ship/run. A whole pallet is moved onto a truck (scheduled onto a Node).</td>
       </tr>
       <tr>
         <td>Service</td>
         <td>A Loading Dock or A Persistent Address</td>
-        <td>Pods are like delivery trucks that constantly change where they park. The Service is the fixed loading dock address you always ship to. The Service ensures your request gets routed to whichever truck (Pod) is currently parked at the dock.</td>
+        <td>Pods are like delivery trucks that constantly change where they park. The Service is the fixed loading dock
+          address you always ship to. The Service ensures your request gets routed to whichever truck (Pod) is currently
+          parked at the dock.</td>
       </tr>
     </tbody>
   </table>
 
   <h2>Nodes and Running Containers in Kubernetes</h2>
-  <p><strong>Nodes</strong> are machines or virtual machines (VMs) that the cluster is made of, actually running our containers.</p>
-  <p>The <strong>master node(s)</strong> run the software that controls the cluster. They are sometimes called the <em>control plane</em> and run the Kubernetes software itself.</p>
+  <p><strong>Nodes</strong> are machines or virtual machines (VMs) that the cluster is made of, actually running our
+    containers.</p>
+  <p>The <strong>master node(s)</strong> run the software that controls the cluster. They are sometimes called the
+    <em>control plane</em> and run the Kubernetes software itself.</p>
   <p>The <strong>worker nodes</strong> are where our containers run — the services we write and deploy.</p>
-  
+
   <p>To run a container in a cluster:</p>
   <pre><code>kubectl run --image=nginx web</code></pre>
   <p>(Note: it is a double hyphen before <code>image</code>. Here, <code>web</code> is the name given to the pod.)</p>
   <p>Output: <code>pod/web created</code></p>
-  
-  <p>Container isn't a word we use directly when talking to Kubernetes. What we run is a wrapper called a <strong>pod</strong>. Think of pods as containers with additional features.</p>
-  
+
+  <p>Container isn't a word we use directly when talking to Kubernetes. What we run is a wrapper called a
+    <strong>pod</strong>. Think of pods as containers with additional features.</p>
+
   <p>To see the pods created:</p>
   <pre><code>kubectl get pods</code></pre>
   <pre><code>kubectl describe pod web</code></pre>
   <p>(The second command gives more details about the pod named <code>web</code>.)</p>
-  
-  <p><strong>Kubectl commands like <code>run</code></strong> directly tell the cluster what to do and are called <em>imperative commands</em>. One problem with imperative commands is that they are fragile. For example, if the pod crashes, you would have to manually notice this and run another pod, causing downtime.</p>
-  
-  <p>Kubernetes is a <em>declarative system</em>. Instead of telling it one-off commands like <code>run</code>, you declare the desired state of the system — for instance, "there should always be an nginx pod running." Kubernetes takes care of selecting nodes, running the container, and restarting it if it crashes. This is done via a YAML file.</p>
-  
+
+  <p><strong>Kubectl commands like <code>run</code></strong> directly tell the cluster what to do and are called
+    <em>imperative commands</em>. One problem with imperative commands is that they are fragile. For example, if the pod
+    crashes, you would have to manually notice this and run another pod, causing downtime.</p>
+
+  <p>Kubernetes is a <em>declarative system</em>. Instead of telling it one-off commands like <code>run</code>, you
+    declare the desired state of the system — for instance, "there should always be an nginx pod running." Kubernetes
+    takes care of selecting nodes, running the container, and restarting it if it crashes. This is done via a YAML file.
+  </p>
+
   <p>To deploy declaratively, you use the <code>apply</code> command:</p>
   <pre><code>kubectl apply -f web-declarative.yaml</code></pre>
-  <p>(The <code>-f</code> flag specifies the filename. In this example, <code>web-declarative.yaml</code> is the file.)</p>
+  <p>(The <code>-f</code> flag specifies the filename. In this example, <code>web-declarative.yaml</code> is the file.)
+  </p>
   <p>Output: <code>pod/web-declarative created</code></p>
 
+  <h2>Exposing Pods and Services in Kubernetes</h2>
+  <p>To make a pod available to be called, <code>kubectl</code> provides the <code>expose</code> command. For example,
+    if there is a pod called <code>green</code>, running <code>expose</code> will create a <strong>Service</strong>. The
+    job of a Service is to make pods more easily accessible inside the cluster’s network.</p>
+  <pre><code>kubectl expose pod green --port 8080 --name blue-green</code></pre>
+  <p>(Here, the pod called <code>green</code> is exposed on port 8080 and the Service is named <code>blue-green</code>.)
+  </p>
+  <p>Output: <code>service/blue-green exposed</code></p>
+  <p>This is an imperative way of creating a Service.</p>
+
+  <p>To delete this manually created Service:</p>
+  <pre><code>kubectl delete service blue-green</code></pre>
+  <p>Output: <code>service "blue-green" deleted from default namespace.</code></p>
+
+  <p>To create a Service declaratively:</p>
+  <pre><code>kubectl apply -f blue-green.yaml</code></pre>
+  <p>Output: <code>service/blue-green created</code></p>
+
+  <p>The Service forwards requests to pods matching specific labels. It uses <strong>selectors</strong> (e.g.,
+    <code>app: blue-green</code>) to identify target pods. Requests go to any pod with those labels, enabling the
+    Service to distribute traffic evenly. This method, called <em>loose coupling</em>, allows flexible pod management.
+  </p>
+  <p>We might add more pods to handle increased demand or for backup, and remove some to save costs. Pods can start,
+    stop, or restart anytime without affecting the system. This works because pods communicate through an intermediary
+    Service, which directs traffic to the appropriate pods using labels. This loose connection not only helps with
+    scaling but also shows how flexible and powerful labels can be.</p>
+
+  <h3>Exposing Pods Outside the Cluster</h3>
+  <p>There are different types of Services:</p>
+  <ul>
+    <li><strong>ClusterIP:</strong> The default type in Kubernetes, used for internal communication within a cluster.
+    </li>
+    <li><strong>NodePort:</strong> A primitive way to get external traffic to your Service, generally suitable for
+      testing.</li>
+    <li><strong>LoadBalancer:</strong> Provides an external load balancer for the Service.</li>
+    <li><strong>Ingress:</strong> Manages external access to services, typically HTTP.</li>
+  </ul>
+
+  <p>To demonstrate exposing pods using <code>NodePort</code>:</p>
+  <ul>
+    <li>Run all files in the <code>NodePortDemo</code> folder using the <code>kubectl apply</code> command.</li>
+    <li>This makes the Service available on a random port on the Minikube VM.</li>
+  </ul>
+
+  <p>To find the IP of the Minikube VM:</p>
+  <pre><code>minikube ip</code></pre>
+
+  <p>To get the port number on the node:</p>
+  <pre><code>kubectl get services</code></pre>
+  <p>The output under the <code>PORT(S)</code> column will look like <code>80:31234/TCP</code>. The second number
+    (<code>31234</code>) is the NodePort.</p>
+
+  <p>Construct the URL as:</p>
+  <pre><code>http://&lt;minikube-ip&gt;:&lt;nodeport&gt;</code></pre>
+
+  <p>If this doesn’t work, run:</p>
+  <pre><code>minikube service &lt;service-name&gt;</code></pre>
+
+  <p>Random traffic will be sent to pods <code>blue</code> and <code>green</code>. Refresh the page to see the load
+    balancing effect.</p>
+
+
 </body>
+
 </html>
