@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JavaScript Event Loop</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+      line-height: 1.6;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      color: #24292e;
+    }
+
+    h2 {
+      color: #0366d6;
+      border-bottom: 2px solid #0366d6;
+      padding-bottom: 6px;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 1.1em;
+      margin-bottom: 20px;
+    }
+
+    ul {
+      list-style-type: disc;
+      padding-left: 20px;
+      margin-bottom: 30px;
+    }
+
+    ol {
+      padding-left: 20px;
+      margin-bottom: 30px;
+    }
+
+    li {
+      margin-bottom: 15px;
+    }
+
+    code {
+      background-color: #eaeaea;
+      padding: 0 4px;
+      border-radius: 3px;
+      font-family: "Courier New", Courier, monospace;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 0 auto 30px auto;
+    }
+  </style>
+</head>
+
+<body>
+  <img src="js_runtime.png" alt="JavaScript Runtime Illustration" />
+  
+  <h1>JavaScript Event Loop</h1>
+
+  <p>JavaScript is single-threaded, meaning it can execute one piece of code at a time in a single call stack. However, it supports asynchronous operations (e.g., timers, network requests) without blocking the main thread. The event loop is the mechanism that enables this non-blocking behavior by managing execution and handling asynchronous callbacks.</p>
+
+  <h2>Key Components</h2>
+  <ul>
+    <li><strong>Call Stack:</strong> This is where JavaScript executes synchronous code in a Last-In, First-Out (LIFO) order. When a function is called, it's pushed onto the stack. When it returns, it's popped off.</li>
+    <li><strong>Web APIs (Browser Environment):</strong> These are environments outside the JavaScript engine that handle asynchronous operations in the background. Examples include <code>setTimeout()</code>, DOM events, and network requests (like <code>fetch</code> or file I/O).</li>
+    <li><strong>Callback Queue (Task/Macrotask Queue):</strong> This queue holds the callback functions for macrotasks (like timers and I/O events) once their asynchronous operations are complete. It's a First-In, First-Out (FIFO) data structure.</li>
+    <li><strong>Microtask Queue (Job Queue):</strong>
+      <ul>
+        <li>Special queue dedicated for Promise callbacks (<code>.then</code>, <code>.catch</code>, <code>.finally</code>), function body execution following <code>await</code>, <code>queueMicrotask</code>, and <code>MutationObserver</code> callbacks.</li>
+        <li>Microtasks have higher priority and are executed before the callback queue.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h2>How Does the Event Loop Work?</h2>
+  <ol>
+    <li><strong>Execution Phase:</strong> JavaScript runs the code inside the call stack until it's empty.</li>
+    <li><strong>Checking Microtasks:</strong> After the call stack is empty, the event loop checks the microtask queue. If there are microtasks, it executes all of them before moving on. This ensures Promise resolutions and similar async tasks run as soon as possible.</li>
+    <li><strong>Checking Callback Queue:</strong> Once all microtasks are executed and the call stack is clear, the event loop processes the first task in the callback queue (e.g., from <code>setTimeout</code> or DOM events) by pushing its callback onto the call stack.</li>
+    <li><strong>Repeat:</strong> The event loop continuously cycles through these steps, allowing asynchronous code to be executed after the synchronous code finishes.</li>
+  </ol>
+
+  <h2>Summary</h2>
+  <p>JavaScript is single-threaded, it can only handle one task at a time. We use Web APIs to interact with features leveraged by the browser and some of these APIs allow us to initiate asynchronous tasks in the background. The function call that initiates an asynchronous task is still added to the call stack, but only to hand off to the browser. The actual async task is handled in the background, so it does not block the call stack.</p>
+  <p>The task queue is used by callback-based Web APIs to enqueue the callback once the async task has completed. The microtask queue is exclusively used by Promise handlers, async function body after <code>await</code>, <code>queueMicrotask</code> callback, and the new <code>MutationObserver</code> callbacks. This queue has priority over the task queue. The event loop ensures the microtask queue is entirely empty before moving on to the task queue. After handling each task from the task queue, the event loop checks the microtask queue again to ensure nothing new was added in the meantime.</p>
+
+</body>
+
+</html>
