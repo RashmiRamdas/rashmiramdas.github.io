@@ -74,7 +74,8 @@
 
   <h2>Key Components</h2>
   <ul>
-    <li><strong>Call Stack:</strong> This is where JavaScript executes synchronous code in a Last-In, First-Out (LIFO) order. When a function is called, it's pushed onto the stack. When it returns, it's popped off.</li>
+    <li><strong>Call Stack:</strong> The JavaScript engine processes all synchronous code. Function calls are pushed onto the Call Stack and popped off as they return.
+When an asynchronous function is encountered (e.g., setTimeout, fetch), it initiates the operation via a Web API, and the original call immediately pops off the Call Stack, allowing the rest of the synchronous code to run without blocking.</li>
     <li><strong>Web APIs (Browser Environment):</strong> These are environments outside the JavaScript engine that handle asynchronous operations in the background. Examples include <code>setTimeout()</code>, DOM events, and network requests (like <code>fetch</code> or file I/O).</li>
     <li><strong>Callback Queue (Task/Macrotask Queue):</strong> This queue holds the callback functions for macrotasks (like timers and I/O events) once their asynchronous operations are complete. It's a First-In, First-Out (FIFO) data structure.</li>
     <li><strong>Microtask Queue (Job Queue):</strong>
@@ -95,7 +96,7 @@
 
   <h2>Summary</h2>
   <p>JavaScript is single-threaded, meaning it executes one task at a time on its call stack. When an asynchronous operation is initiated via browser-provided Web APIs, the initial function call runs on the call stack, but the actual asynchronous work happens in the background, so the call stack remains unblocked. Once the async operation completes, its callback is placed in the task queue (for most callbacks) or the microtask queue (for Promise handlers, async/await continuations, queueMicrotask, and MutationObserver). The event loop continuously processes tasks from the task queue but always prioritizes emptying the microtask queue first, ensuring microtasks run immediately after the current task completes and before moving on to the next task. This mechanism allows JavaScript to handle asynchronous behavior efficiently without blocking the single thread.</p>
-  
+
 </body>
 
 </html>
