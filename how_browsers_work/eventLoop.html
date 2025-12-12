@@ -94,9 +94,8 @@
   </ol>
 
   <h2>Summary</h2>
-  <p>JavaScript is single-threaded, it can only handle one task at a time. We use Web APIs to interact with features leveraged by the browser and some of these APIs allow us to initiate asynchronous tasks in the background. The function call that initiates an asynchronous task is still added to the call stack, but only to hand off to the browser. The actual async task is handled in the background, so it does not block the call stack.</p>
-  <p>The task queue is used by callback-based Web APIs to enqueue the callback once the async task has completed. The microtask queue is exclusively used by Promise handlers, async function body after <code>await</code>, <code>queueMicrotask</code> callback, and the new <code>MutationObserver</code> callbacks. This queue has priority over the task queue. The event loop ensures the microtask queue is entirely empty before moving on to the task queue. After handling each task from the task queue, the event loop checks the microtask queue again to ensure nothing new was added in the meantime.</p>
-
+  <p>JavaScript is single-threaded, meaning it executes one task at a time on its call stack. When an asynchronous operation is initiated via browser-provided Web APIs, the initial function call runs on the call stack, but the actual asynchronous work happens in the background, so the call stack remains unblocked. Once the async operation completes, its callback is placed in the task queue (for most callbacks) or the microtask queue (for Promise handlers, async/await continuations, queueMicrotask, and MutationObserver). The event loop continuously processes tasks from the task queue but always prioritizes emptying the microtask queue first, ensuring microtasks run immediately after the current task completes and before moving on to the next task. This mechanism allows JavaScript to handle asynchronous behavior efficiently without blocking the single thread.</p>
+  
 </body>
 
 </html>
