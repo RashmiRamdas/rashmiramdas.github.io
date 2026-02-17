@@ -180,6 +180,17 @@
   <p>To delete created namespaces</p>
   <pre><code>kubectl delete -f namespace.yaml</code></pre>
 
+  <p>A YAML file begins with three hyphens (<code>---</code>), which signify the start of a document. A single YAML file
+    can contain multiple documents separated by these markers.</p>
+
+  <p>Sample: <code>namespace.yaml</code></p>
+  <pre><code>---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: development</code></pre>
+
+
   <h2>Vocabulary</h2>
   <p><strong>Cluster</strong> - instance of Kubernetes. Each cluster has control plane and at least one worker node.</p>
   <p>If Kubernetes is like an airport, the control pane is like the air traffic control tower with people overlooking
@@ -264,7 +275,8 @@
   <p><strong>Nodes</strong> are machines or virtual machines (VMs) that the cluster is made of, actually running our
     containers.</p>
   <p>The <strong>master node(s)</strong> run the software that controls the cluster. They are sometimes called the
-    <em>control plane</em> and run the Kubernetes software itself.</p>
+    <em>control plane</em> and run the Kubernetes software itself.
+  </p>
   <p>The <strong>worker nodes</strong> are where our containers run — the services we write and deploy.</p>
 
   <p>To run a container in a cluster:</p>
@@ -273,16 +285,18 @@
   <p>Output: <code>pod/web created</code></p>
 
   <p>Container isn't a word we use directly when talking to Kubernetes. What we run is a wrapper called a
-    <strong>pod</strong>. Think of pods as containers with additional features.</p>
+    <strong>pod</strong>. Think of pods as containers with additional features.
+  </p>
 
   <p>To see the pods created:</p>
   <pre><code>kubectl get pods</code></pre>
-  <pre><code>kubectl describe pod web</code></pre>
+  <pre><code>kubectl describe pod web</code></pre> <span> (To get more details of pod(to health check pods)) </span>
   <p>(The second command gives more details about the pod named <code>web</code>.)</p>
 
   <p><strong>Kubectl commands like <code>run</code></strong> directly tell the cluster what to do and are called
     <em>imperative commands</em>. One problem with imperative commands is that they are fragile. For example, if the pod
-    crashes, you would have to manually notice this and run another pod, causing downtime.</p>
+    crashes, you would have to manually notice this and run another pod, causing downtime.
+  </p>
 
   <p>Kubernetes is a <em>declarative system</em>. Instead of telling it one-off commands like <code>run</code>, you
     declare the desired state of the system — for instance, "there should always be an nginx pod running." Kubernetes
