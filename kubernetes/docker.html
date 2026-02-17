@@ -178,6 +178,50 @@ docker attach &lt;container_name&gt;</code></pre>
 
   <h2>Example Mount Command</h2>
   <pre><code>docker run -ti --mount src="$(pwd)",target=/usr/src/app,type=bind --name droplets-container20 droplets-image-badge-visual bash</code></pre>
+
+  <h2>GitHub Actions Overview</h2>
+<p>GitHub Actions is a continuous integration and continuous delivery (CI/CD) platform that allows you to automate your build, test, and deployment pipeline. You can create workflows that build and test every pull request to your repository, or deploy merged pull requests to production.</p>
+
+<h2>Components of GitHub Actions</h2>
+<ul>
+  <li><strong>Workflows:</strong>
+    <ul>
+      <li>A configurable automated process that runs one or more jobs.</li>
+      <li>Defined by YAML files checked into the <code>.github/workflows</code> directory in a repository.</li>
+      <li>Triggered by events in the repository, manual triggers, or scheduled times.</li>
+    </ul>
+  </li>
+  <li><strong>Events:</strong>
+    <ul>
+      <li>Specific activities in a repository that trigger workflows.</li>
+      <li>Examples include pull request creation, issue opening, or commit pushes.</li>
+    </ul>
+  </li>
+  <li><strong>Jobs:</strong>
+    <ul>
+      <li>A set of steps executed on the same runner.</li>
+      <li>Steps are either shell scripts or actions (reusable extensions).</li>
+      <li>Steps run sequentially and can share data.</li>
+      <li>Jobs run in parallel by default but can be configured with dependencies.</li>
+    </ul>
+  </li>
+  <li><strong>Actions:</strong>
+    <ul>
+      <li>Reusable extensions to perform complex or repetitive tasks.</li>
+      <li>Help reduce repetitive code in workflow files.</li>
+      <li>Example: <code>actions/checkout@v2</code></li>
+    </ul>
+  </li>
+  <li><strong>Runners:</strong>
+    <ul>
+      <li>Servers that run your workflows when triggered.</li>
+      <li>Each runner runs a single job at a time.</li>
+      <li>GitHub provides runners for Ubuntu Linux, Windows, and macOS.</li>
+      <li>Each workflow run executes in a fresh, newly provisioned virtual machine.</li>
+    </ul>
+  </li>
+</ul>
+
   
 </body>
 </html>
