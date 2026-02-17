@@ -309,6 +309,27 @@ metadata:
   </p>
   <p>Output: <code>pod/web-declarative created</code></p>
 
+  <p>Sample: <code>web-declarative.yaml</code></p>
+  <pre><code>---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web-declarative
+  labels:
+    site: blog
+spec:
+  containers:
+    - name: web
+      image: nginx:1.18.0</code></pre>
+
+
+  <h3>Exposing Your Application</h3>
+  <p>How do you expose your application to the internet? The answer is a <strong>Kubernetes Service</strong>. It acts as
+    a load balancer that directs traffic from the internet to your Pods.</p>
+  <p>A LoadBalancer service provides a <strong>public</strong> and <strong>static</strong> IP address. The public IP
+    allows external access, while the static nature ensures your connection remains stable even as Pods are created or
+    destroyed with changing internal IPs.</p>
+
   <h2>Exposing Pods and Services in Kubernetes</h2>
   <p>To make a pod available to be called, <code>kubectl</code> provides the <code>expose</code> command. For example,
     if there is a pod called <code>green</code>, running <code>expose</code> will create a <strong>Service</strong>. The
@@ -369,6 +390,97 @@ metadata:
 
   <p>Random traffic will be sent to pods <code>blue</code> and <code>green</code>. Refresh the page to see the load
     balancing effect.</p>
+
+  <p>In a Kubernetes manifest, the <code>apiVersion</code> tells the cluster which version of the <strong>Kubernetes
+      API</strong> to use when creating a specific object. You can refer to the <a
+      href="https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/deployment-v1/"
+      target="_blank">official documentation</a> for more details.</p>
+
+  <h3>Imperative vs. Declarative Exposure</h3>
+  <p>After creating a pod using the <code>apply</code> command, you can create a service immediately using the
+    <code>expose</code> command:</p>
+  <pre><code>kubectl apply -f green.yaml 
+# Output: pod/green created
+
+kubectl expose pod green --port 8000 --name blue-green 
+# Output: service/blue-green exposed</code></pre>
+
+  <h3>Sample Manifests: Pod and Service</h3>
+  <p><strong>Pod (blue):</strong></p>
+  <pre><code>apiVersion: v1
+kind: Pod
+metadata:
+  name: blue
+  labels:
+    app: blue-green
+spec:
+  containers:
+    - name: blue
+      image: docker.io/mtinside/blue-green:blue</code></pre>
+
+  <p><strong>Service (NodePort):</strong></p>
+  <pre><code>apiVersion: v1
+kind: Service
+metadata:
+  name: blue-green
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 8080
+  selector:
+    app: blue-green</code></pre>
+
+  <hr>
+
+  <h3>Advanced Example: Deployment and LoadBalancer</h3>
+  <pre><code>---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pod-info-deployment
+  namespace: development
+  labels:
+    app: pod-info
+spec:
+# ... deployment specs ...
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-service
+  namespace: development
+spec:
+  selector:
+    app: pod-info
+  ports:
+    - port: 80
+      targetPort: 3000
+  type: LoadBalancer</code></pre>
+
+  <ul>
+    <li><strong>Port Mapping:</strong> We set the service port to <code>80</code> (standard HTTP), so no port number is
+      needed in the URL. It directs traffic to <code>port 3000</code> inside the container.</li>
+    <li><strong>Service Types:</strong> We specified <code>LoadBalancer</code>. The three main types are
+      <strong>LoadBalancer</strong>, <strong>NodePort</strong>, and <strong>ClusterIP</strong>.</li>
+    <li><strong>Selectors and Labels:</strong> The <code>selector</code> tells the service to send traffic to pods
+      labeled <code>app: pod-info</code>. In the Deployment, we ensure pods are created with this label. <strong>If
+        these don't match, the service cannot find your pods.</strong></li>
+  </ul>
+
+  <h3>Utility Commands</h3>
+  <p>To understand a resource structure:</p>
+  <pre><code>kubectl explain pod</code></pre>
+
+  <p>To delete a specific resource:</p>
+  <pre><code>kubectl delete pod blue</code></pre>
+
+  <p>To tunnel traffic from your local machine to a cluster resource:</p>
+  <pre><code>kubectl port-forward blue 5000:8080</code></pre>
+  <p>Then, navigate to <code>127.0.0.1:5000</code> in your browser.</p>
+
+  <p>To view your cluster objects in a web interface:</p>
+  <pre><code>minikube dashboard</code></pre>
 
 
 </body>
