@@ -34,9 +34,11 @@
             color: #0798fa;
             margin-bottom: 0.5rem;
         }
+
         h1 {
             color: #0164a6;
         }
+
         p,
         ul,
         ol {
@@ -186,6 +188,39 @@
             console.log('Hi!');
             };
         </code></pre>
+        <h2>Behavior of <code>let</code> and <code>const</code> Variables</h2>
+        <p>
+            Variables declared with <code>let</code> and <code>const</code> differ from <code>var</code> in terms of
+            hoisting and initialization:
+        </p>
+        <ul>
+            <li>
+                <strong>Hoisting:</strong> <code>let</code> and <code>const</code> declarations are hoisted to the top
+                of their block scope, but they are <em>not</em> initialized during the memory allocation phase.
+            </li>
+            <li>
+                <strong>Temporal Dead Zone (TDZ):</strong> From the start of the block until the variable declaration is
+                reached, the variable is in a "temporal dead zone." Accessing it before declaration causes a
+                <code>ReferenceError</code>.
+            </li>
+            <li>
+                <strong>Initialization:</strong>
+                <ul>
+                    <li><code>let</code> variables can be declared without initialization and assigned later.</li>
+                    <li><code>const</code> variables must be initialized at declaration and cannot be reassigned.</li>
+                </ul>
+            </li>
+        </ul>
+        <pre><code>
+            console.log(x); // ReferenceError: Cannot access 'x' before initialization
+            let x = 10;
+            </code></pre>
+        <p>
+            <strong>Summary:</strong>
+            <code>let</code> and <code>const</code> are block-scoped, hoisted but not initialized, causing a temporal
+            dead zone until their declaration. Accessing them before declaration throws a <code>ReferenceError</code>.
+            Additionally, <code>const</code> requires initialization at declaration and cannot be reassigned.
+        </p>
 
     </div>
 </body>
