@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Learning</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 20px;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    h1 {
+      color: #007acc;
+    }
+    h2 {
+      color: #005a9e;
+      margin-top: 1.5em;
+    }
+    p {
+      margin: 0.5em 0;
+    }
+    ul {
+      margin: 0.5em 0 1em 1.5em;
+    }
+    code {
+      background-color: #eee;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: Consolas, monospace;
+      font-size: 1em;
+    }
+    pre {
+      background-color: #272822;
+      color: #f8f8f2;
+      padding: 15px;
+      border-radius: 6px;
+      overflow-x: auto;
+      font-family: Consolas, monospace;
+      font-size: 1em;
+    }
+  </style>
+</head>
+<body>
+  <h1>JavaScript Execution Context</h1>
+  <p>
+    The <strong>Execution Context</strong> is the environment where JavaScript code is evaluated and executed.
+    There are two main types of execution contexts:
+  </p>
+  <ul>
+    <li><strong>Global Execution Context</strong></li>
+    <li><strong>Function Execution Context</strong></li>
+  </ul>
+
+  <h2>Components of Execution Context</h2>
+  <p>An execution context contains two main parts:</p>
+  <ul>
+    <li><strong>Memory (Variable Object):</strong> Where variables and functions are stored.</li>
+    <li><strong>Code:</strong> The actual JavaScript code to be executed.</li>
+  </ul>
+
+  <h2>Execution Process</h2>
+  <p>When JavaScript code runs, it follows these steps:</p>
+  <ol>
+    <li>
+      <strong>Memory Allocation Phase:</strong>
+      <ul>
+        <li>Memory is allocated for variables and functions.</li>
+        <li>Variables are initialized with <code>undefined</code>.</li>
+        <li>Function declarations are fully stored (hoisted).</li>
+      </ul>
+    </li>
+    <li>
+      <strong>Code Execution Phase:</strong>
+      <ul>
+        <li>Code executes synchronously, line by line.</li>
+        <li>Variables receive their assigned values during this phase.</li>
+      </ul>
+    </li>
+  </ol>
+
+  <h2>Call Stack and Execution Context</h2>
+  <p>JavaScript uses a <strong>call stack</strong> to manage execution contexts:</p>
+  <ul>
+    <li>The global execution context is created first and pushed onto the call stack.</li>
+    <li>When a function is called, a new execution context is created and pushed onto the stack.</li>
+    <li>When the function finishes executing, its execution context is popped off the stack.</li>
+  </ul>
+
+  <h2>Example Code</h2>
+  <pre><code>var a = 10;
+
+function foo() {
+  var b = 20;
+  function bar() {
+    var c = 30;
+    console.log(a + b + c);
+  }
+  bar();
+}
+
+foo();  // Output: 60
+</code></pre>
+
+  <h2>Execution Order Explained</h2>
+  <ol>
+    <li>The script starts and the global execution context is created.</li>
+    <li>Memory is allocated for <code>a</code> and <code>foo</code>.</li>
+    <li><code>foo()</code> is called, creating a new function execution context.</li>
+    <li>Memory is allocated for <code>b</code> and <code>bar</code> inside <code>foo</code>.</li>
+    <li><code>bar()</code> is called, creating another execution context.</li>
+    <li>Memory is allocated for <code>c</code> inside <code>bar</code>.</li>
+    <li><code>console.log(a + b + c)</code> runs and outputs <code>60</code>.</li>
+    <li>Each execution context is popped off the call stack as the functions finish.</li>
+  </ol>
+</body>
+</html>
