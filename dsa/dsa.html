@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DSA Topics - Two Sum Solution</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    nav a {
+      display: inline-block;
+      margin-right: 1rem;
+      padding: 0.5rem 1rem;
+      background-color: #4285f4;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+    nav a:hover {
+      background-color: #3367d6;
+    }
+    section {
+      margin-top: 2rem;
+      max-width: 700px;
+    }
+    pre {
+      background-color: #272822;
+      color: #f8f8f2;
+      padding: 1rem;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    h1, h2, h3 {
+      color: #2c3e50;
+    }
+    .explanation {
+      margin-top: 1rem;
+      background-color: #e8f0fe;
+      border-left: 5px solid #4285f4;
+      padding: 1rem;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Data Structures & Algorithms (DSA)</h1>
+  <nav>
+    <a href="#array-dsa">Array DSA</a>
+    <a href="#string-dsa">String DSA</a>
+  </nav>
+
+  <section id="array-dsa">
+    <h2>Array DSA</h2>
+    <p>Here you can find array-related problems, explanations, and code examples.</p>
+
+    <h3>Two Sum Problem (Array)</h3>
+    <pre><code>
+function twoSum(nums, target) {
+  const numToIndex = new Map();
+
+  for (let i = 0; i &lt; nums.length; i++) {
+    const complement = target - nums[i];
+    if (numToIndex.has(complement)) {
+      return [numToIndex.get(complement), i];
+    }
+    numToIndex.set(nums[i], i);
+  }
+}
+    </code></pre>
+
+    <div class="explanation">
+      <h4>Explanation</h4>
+      <ul>
+        <li>Use a <code>Map</code> to store each number and its index while iterating through the array.</li>
+        <li>For each number, calculate its <strong>complement</strong> as <code>target - current number</code>.</li>
+        <li>If the complement exists in the map, return the indices of the complement and current number.</li>
+        <li>If not, add the current number and its index to the map and continue.</li>
+        <li>This approach runs in <code>O(n)</code> time, where <code>n</code> is the array length.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="string-dsa">
+    <h2>String DSA</h2>
+    <p>Here you can include string-related problems, explanations, and code examples.</p>
+    <!-- Placeholder for future string problems -->
+    <h3>Example String Problem</h3>
+    <p>Details and code for string problems will go here.</p>
+  </section>
+</body>
+</html>
