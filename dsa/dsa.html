@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -10,8 +11,10 @@
       margin: 2rem;
       background-color: #f9f9f9;
       color: #333;
-      text-align: center; /* Center align all content */
+      text-align: center;
+      /* Center align all content */
     }
+
     nav a {
       display: inline-block;
       margin: 0 1rem 1rem 1rem;
@@ -22,36 +25,48 @@
       border-radius: 4px;
       text-align: center;
     }
+
     nav a:hover {
       background-color: #3367d6;
     }
+
     section {
       margin: 2rem auto;
       max-width: 700px;
-      text-align: left; /* Keep section text left aligned for readability */
+      text-align: left;
+      /* Keep section text left aligned for readability */
     }
+
     pre {
       background-color: #272822;
       color: #f8f8f2;
       padding: 1rem;
       border-radius: 5px;
       overflow-x: auto;
-      text-align: left; /* Code blocks left aligned */
+      text-align: left;
+      /* Code blocks left aligned */
       font-family: monospace;
       font-size: 1rem;
     }
-    h1, h2, h3, h4 {
+
+    h1,
+    h2,
+    h3,
+    h4 {
       color: #2c3e50;
     }
+
     .explanation {
       margin-top: 1rem;
       background-color: #e8f0fe;
       border-left: 5px solid #4285f4;
       padding: 1rem;
       border-radius: 4px;
-      text-align: left; /* Explanation text left aligned */
+      text-align: left;
+      /* Explanation text left aligned */
       line-height: 1.5;
     }
+
     .problem-statement {
       background-color: #e0f7fa;
       border-left: 5px solid #00796b;
@@ -61,6 +76,7 @@
     }
   </style>
 </head>
+
 <body>
   <h1>Data Structures & Algorithms (DSA)</h1>
   <nav>
@@ -74,10 +90,12 @@
     <div class="problem-statement">
       <h3>Problem Statement: Two Sum</h3>
       <p>
-        Given an array of integers <code>nums</code> and an integer <code>target</code>, return the indices of the two numbers such that they add up to <code>target</code>.
+        Given an array of integers <code>nums</code> and an integer <code>target</code>, return the indices of the two
+        numbers such that they add up to <code>target</code>.
       </p>
       <p>
-        You may assume that each input would have exactly one solution, and you may not use the same element twice. You can return the answer in any order.
+        You may assume that each input would have exactly one solution, and you may not use the same element twice. You
+        can return the answer in any order.
       </p>
       <h4>Example:</h4>
       <p>
@@ -100,7 +118,7 @@ function twoSum(nums, target) {
     numToIndex.set(nums[i], i);
   }
 }
-    </code></pre>
+  </code></pre>
 
     <div class="explanation">
       <h4>Explanation</h4>
@@ -118,8 +136,10 @@ function twoSum(nums, target) {
     <div class="problem-statement">
       <h3>Problem Statement: Best Time to Buy and Sell Stock</h3>
       <p>
-        You are given an array <code>prices</code> where <code>prices[i]</code> is the price of a given stock on the <code>i<sup>th</sup></code> day.
-        You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.
+        You are given an array <code>prices</code> where <code>prices[i]</code> is the price of a given stock on the
+        <code>i<sup>th</sup></code> day.
+        You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the
+        future to sell that stock.
         Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
       </p>
     </div>
@@ -140,20 +160,62 @@ function maxProfit(prices) {
 
   return maxProfit; // Step 3: Return the maximum profit found
 }
-    </code></pre>
+  </code></pre>
 
     <div class="explanation">
       <h4>Step-by-Step Explanation</h4>
       <ol>
-        <li><strong>Initialize variables:</strong> Set <code>minPrice</code> to a very large number (Infinity) and <code>maxProfit</code> to 0.</li>
+        <li><strong>Initialize variables:</strong> Set <code>minPrice</code> to a very large number (Infinity) and
+          <code>maxProfit</code> to 0.</li>
         <li><strong>Iterate through each price:</strong> For each day's price in the array:
           <ul>
-            <li>If the current price is less than <code>minPrice</code>, update <code>minPrice</code> to this lower price (meaning a better day to buy).</li>
-            <li>Otherwise, calculate the profit by subtracting <code>minPrice</code> from the current price. If this profit is greater than the current <code>maxProfit</code>, update <code>maxProfit</code>.</li>
+            <li>If the current price is less than <code>minPrice</code>, update <code>minPrice</code> to this lower
+              price (meaning a better day to buy).</li>
+            <li>Otherwise, calculate the profit by subtracting <code>minPrice</code> from the current price. If this
+              profit is greater than the current <code>maxProfit</code>, update <code>maxProfit</code>.</li>
           </ul>
         </li>
-        <li><strong>Return the result:</strong> After checking all prices, return the <code>maxProfit</code> found. If no profit is possible, it will be 0.</li>
+        <li><strong>Return the result:</strong> After checking all prices, return the <code>maxProfit</code> found. If
+          no profit is possible, it will be 0.</li>
       </ol>
+    </div>
+
+    <hr style="margin: 3rem 0;" />
+
+    <div class="problem-statement">
+      <h3>Problem Statement: Contains Duplicate</h3>
+      <p>
+        Given an integer array <code>nums</code>, return <code>true</code> if any value appears at least twice in the
+        array, and return <code>false</code> if every element is distinct.
+      </p>
+    </div>
+
+    <h3>JavaScript Solution</h3>
+    <pre><code>
+      var containsDuplicate = function(nums) {
+        let set = new Set();
+        for (let num of nums) {
+          if (set.has(num)) {
+            return true;
+          }
+          set.add(num);
+        }
+        return false;
+      };
+    </code></pre>
+
+    <div class="explanation">
+      <h4>Explanation</h4>
+      <ul>
+        <li>Create a <code>Set</code> to keep track of unique numbers encountered.</li>
+        <li>Iterate through each number in the array:</li>
+        <ul>
+          <li>If the number already exists in the set, return <code>true</code> immediately (duplicate found).</li>
+          <li>If not, add the number to the set.</li>
+        </ul>
+        <li>If the loop completes without finding duplicates, return <code>false</code>.</li>
+        <li>This approach has a time complexity of <code>O(n)</code> and space complexity of <code>O(n)</code>.</li>
+      </ul>
     </div>
   </section>
 
