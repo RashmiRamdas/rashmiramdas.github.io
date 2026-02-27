@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DSA Topics - Two Sum Solution</title>
+  <title>DSA Topics</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -37,6 +37,8 @@
       border-radius: 5px;
       overflow-x: auto;
       text-align: left; /* Code blocks left aligned */
+      font-family: monospace;
+      font-size: 1rem;
     }
     h1, h2, h3, h4 {
       color: #2c3e50;
@@ -48,6 +50,7 @@
       padding: 1rem;
       border-radius: 4px;
       text-align: left; /* Explanation text left aligned */
+      line-height: 1.5;
     }
     .problem-statement {
       background-color: #e0f7fa;
@@ -108,6 +111,49 @@ function twoSum(nums, target) {
         <li>If not, add the current number and its index to the map and continue.</li>
         <li>This approach runs in <code>O(n)</code> time, where <code>n</code> is the array length.</li>
       </ul>
+    </div>
+
+    <hr style="margin: 3rem 0;" />
+
+    <div class="problem-statement">
+      <h3>Problem Statement: Best Time to Buy and Sell Stock</h3>
+      <p>
+        You are given an array <code>prices</code> where <code>prices[i]</code> is the price of a given stock on the <code>i<sup>th</sup></code> day.
+        You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.
+        Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
+      </p>
+    </div>
+
+    <h3>JavaScript Solution</h3>
+    <pre><code>
+function maxProfit(prices) {
+  let minPrice = Infinity;
+  let maxProfit = 0;
+
+  for (let price of prices) {
+    if (price &lt; minPrice) {
+      minPrice = price; // Step 1: Update minPrice if current price is lower
+    } else if (price - minPrice &gt; maxProfit) {
+      maxProfit = price - minPrice; // Step 2: Update maxProfit if current profit is higher
+    }
+  }
+
+  return maxProfit; // Step 3: Return the maximum profit found
+}
+    </code></pre>
+
+    <div class="explanation">
+      <h4>Step-by-Step Explanation</h4>
+      <ol>
+        <li><strong>Initialize variables:</strong> Set <code>minPrice</code> to a very large number (Infinity) and <code>maxProfit</code> to 0.</li>
+        <li><strong>Iterate through each price:</strong> For each day's price in the array:
+          <ul>
+            <li>If the current price is less than <code>minPrice</code>, update <code>minPrice</code> to this lower price (meaning a better day to buy).</li>
+            <li>Otherwise, calculate the profit by subtracting <code>minPrice</code> from the current price. If this profit is greater than the current <code>maxProfit</code>, update <code>maxProfit</code>.</li>
+          </ul>
+        </li>
+        <li><strong>Return the result:</strong> After checking all prices, return the <code>maxProfit</code> found. If no profit is possible, it will be 0.</li>
+      </ol>
     </div>
   </section>
 
