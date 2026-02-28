@@ -83,11 +83,17 @@
     <a href="#array-dsa">Array DSA</a>
     <a href="#string-dsa">String DSA</a>
   </nav>
-
   <section id="array-dsa">
     <h2>Array DSA</h2>
+    <nav>
+      <!-- Navigation links for array examples -->
+      <a href="#two-sum">Two Sum</a>
+      <a href="#best-time-to-buy-and-sell-stock">Best Time to Buy and Sell Stock</a>
+      <a href="#contains-duplicate">Contains Duplicate</a>
+      <a href="#product-of-array-except-self">Product of Array Except Self</a>
+    </nav>
 
-    <div class="problem-statement">
+    <div id="two-sum" class="problem-statement">
       <h3>Problem Statement: Two Sum</h3>
       <p>
         Given an array of integers <code>nums</code> and an integer <code>target</code>, return the indices of the two
@@ -104,12 +110,9 @@
         <em>Explanation:</em> <code>nums[0] + nums[1] = 2 + 7 = 9</code>
       </p>
     </div>
-
     <h3>JavaScript Solution</h3>
-    <pre><code>
-function twoSum(nums, target) {
+    <pre><code>function twoSum(nums, target) {
   const numToIndex = new Map();
-
   for (let i = 0; i &lt; nums.length; i++) {
     const complement = target - nums[i];
     if (numToIndex.has(complement)) {
@@ -118,8 +121,7 @@ function twoSum(nums, target) {
     numToIndex.set(nums[i], i);
   }
 }
-  </code></pre>
-
+</code></pre>
     <div class="explanation">
       <h4>Explanation</h4>
       <ul>
@@ -130,10 +132,9 @@ function twoSum(nums, target) {
         <li>This approach runs in <code>O(n)</code> time, where <code>n</code> is the array length.</li>
       </ul>
     </div>
-
     <hr style="margin: 3rem 0;" />
 
-    <div class="problem-statement">
+    <div id="best-time-to-buy-and-sell-stock" class="problem-statement">
       <h3>Problem Statement: Best Time to Buy and Sell Stock</h3>
       <p>
         You are given an array <code>prices</code> where <code>prices[i]</code> is the price of a given stock on the
@@ -143,13 +144,10 @@ function twoSum(nums, target) {
         Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
       </p>
     </div>
-
     <h3>JavaScript Solution</h3>
-    <pre><code>
-function maxProfit(prices) {
+    <pre><code>function maxProfit(prices) {
   let minPrice = Infinity;
   let maxProfit = 0;
-
   for (let price of prices) {
     if (price &lt; minPrice) {
       minPrice = price; // Step 1: Update minPrice if current price is lower
@@ -157,16 +155,15 @@ function maxProfit(prices) {
       maxProfit = price - minPrice; // Step 2: Update maxProfit if current profit is higher
     }
   }
-
   return maxProfit; // Step 3: Return the maximum profit found
 }
-  </code></pre>
-
+</code></pre>
     <div class="explanation">
       <h4>Step-by-Step Explanation</h4>
       <ol>
         <li><strong>Initialize variables:</strong> Set <code>minPrice</code> to a very large number (Infinity) and
-          <code>maxProfit</code> to 0.</li>
+          <code>maxProfit</code> to 0.
+        </li>
         <li><strong>Iterate through each price:</strong> For each day's price in the array:
           <ul>
             <li>If the current price is less than <code>minPrice</code>, update <code>minPrice</code> to this lower
@@ -179,31 +176,27 @@ function maxProfit(prices) {
           no profit is possible, it will be 0.</li>
       </ol>
     </div>
-
     <hr style="margin: 3rem 0;" />
 
-    <div class="problem-statement">
+    <div id="contains-duplicate" class="problem-statement">
       <h3>Problem Statement: Contains Duplicate</h3>
       <p>
         Given an integer array <code>nums</code>, return <code>true</code> if any value appears at least twice in the
         array, and return <code>false</code> if every element is distinct.
       </p>
     </div>
-
     <h3>JavaScript Solution</h3>
-    <pre><code>
-      var containsDuplicate = function(nums) {
-        let set = new Set();
-        for (let num of nums) {
-          if (set.has(num)) {
-            return true;
-          }
-          set.add(num);
-        }
-        return false;
-      };
-    </code></pre>
-
+    <pre><code>var containsDuplicate = function(nums) {
+  let set = new Set();
+  for (let num of nums) {
+    if (set.has(num)) {
+      return true;
+    }
+    set.add(num);
+  }
+  return false;
+};
+</code></pre>
     <div class="explanation">
       <h4>Explanation</h4>
       <ul>
@@ -217,8 +210,76 @@ function maxProfit(prices) {
         <li>This approach has a time complexity of <code>O(n)</code> and space complexity of <code>O(n)</code>.</li>
       </ul>
     </div>
-  </section>
+    <hr style="margin: 3rem 0;" />
 
+    <div id="product-of-array-except-self" class="problem-statement">
+      <h3>Problem Statement: Product of Array Except Self</h3>
+      <p>
+        Given an integer array <code>nums</code>, return an array <code>answer</code> such that <code>answer[i]</code>
+        is equal to the product of all the elements of <code>nums</code> except <code>nums[i]</code>.
+        The product of any prefix or suffix of <code>nums</code> is guaranteed to fit in a 32-bit integer.
+        You must write an algorithm that runs in <code>O(n)</code> time and without using the division operation.
+      </p>
+      <h4>Example 1:</h4>
+      <p><strong>Input:</strong> <code>nums = [1,2,3,4]</code><br />
+        <strong>Output:</strong> <code>[24,12,8,6]</code>
+      </p>
+      <h4>Example 2:</h4>
+      <p><strong>Input:</strong> <code>nums = [-1,1,0,-3,3]</code><br />
+        <strong>Output:</strong> <code>[0,0,9,0,0]</code>
+      </p>
+    </div>
+    <h3>JavaScript Solution</h3>
+    <pre><code>var productExceptSelf = function(nums) {
+        let res = [];
+        let prefix = 1;
+        let suffix = 1;
+
+        // Calculate prefix products and store in res
+        for (let i = 0; i &lt; nums.length; i++) {
+          // For i=0, prefix remains 1; for others, multiply prefix by previous element
+          prefix = i === 0 ? 1 : prefix * nums[i - 1];
+          res.push(prefix);
+        }
+
+        // Calculate suffix products and multiply with prefix products in res
+        for (let j = nums.length - 1; j &gt;= 0; j--) {
+          // For last element, suffix remains 1; for others, multiply suffix by next element
+          suffix = j === nums.length - 1 ? 1 : suffix * nums[j + 1];
+          res[j] = res[j] * suffix;
+        }
+
+        return res;
+      };
+    </code></pre>
+    <div class="explanation">
+      <h4>Explanation of the code:</h4>
+      <ul>
+        <li><strong>Prefix loop:</strong>
+          <ul>
+            <li>Prefix starts at 1.</li>
+            <li>For each index <code>i</code>, multiply prefix by the element before <code>i</code> (except for
+              <code>i=0</code>, where prefix stays 1).</li>
+            <li>Push this prefix product into <code>res</code>.</li>
+            <li>After this loop, <code>res[i]</code> contains the product of all elements to the left of <code>i</code>.
+            </li>
+          </ul>
+        </li>
+        <li><strong>Suffix loop:</strong>
+          <ul>
+            <li>Suffix starts at 1.</li>
+            <li>Iterate from the end to the start.</li>
+            <li>For each index <code>j</code>, multiply suffix by the element after <code>j</code> (except for the last
+              element, where suffix stays 1).</li>
+            <li>Multiply <code>res[j]</code> by this suffix product to include the product of all elements to the right
+              of <code>j</code>.</li>
+          </ul>
+        </li>
+        <li>Finally, <code>res</code> contains the product of all elements except <code>nums[i]</code> for each
+          <code>i</code>.</li>
+      </ul>
+    </div>
+  </section>
   <section id="string-dsa">
     <h2>String DSA</h2>
     <p>Here you can include string-related problems, explanations, and code examples.</p>
@@ -227,4 +288,5 @@ function maxProfit(prices) {
     <p>Details and code for string problems will go here.</p>
   </section>
 </body>
+
 </html>
