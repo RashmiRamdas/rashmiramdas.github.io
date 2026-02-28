@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -17,7 +16,6 @@
             /* center horizontally */
             min-height: 100vh;
         }
-
         .container {
             max-width: 700px;
             width: 100%;
@@ -28,36 +26,30 @@
             text-align: left;
             /* left-align text inside */
         }
-
         h1,
         h2 {
             color: #0798fa;
             margin-bottom: 0.5rem;
         }
-
         h1 {
             color: #0164a6;
         }
-
         p,
         ul,
         ol {
             line-height: 1.6;
             margin-bottom: 1.5rem;
         }
-
         ul,
         ol {
             padding-left: 1.5rem;
         }
-
         code {
             padding: 0.2rem 0.5rem;
             border-radius: 4px;
             font-family: Consolas, monospace;
             font-size: 1rem;
         }
-
         pre {
             background-color: #2d2d2d;
             color: #f8f8f2;
@@ -72,7 +64,6 @@
         }
     </style>
 </head>
-
 <body>
     <div class="container">
         <h1>JavaScript Execution Context</h1>
@@ -84,14 +75,12 @@
             <li><strong>Global Execution Context</strong></li>
             <li><strong>Function Execution Context</strong></li>
         </ul>
-
         <h2>Components of Execution Context</h2>
         <p>An execution context contains two main parts:</p>
         <ul>
             <li><strong>Memory (Variable Object):</strong> Where variables and functions are stored.</li>
             <li><strong>Code:</strong> The actual JavaScript code to be executed.</li>
         </ul>
-
         <h2>Execution Process</h2>
         <p>When JavaScript code runs, it follows these steps:</p>
         <ol>
@@ -111,7 +100,6 @@
                 </ul>
             </li>
         </ol>
-
         <h2>Call Stack and Execution Context</h2>
         <p>JavaScript uses a <strong>call stack</strong> to manage execution contexts:</p>
         <ul>
@@ -119,23 +107,19 @@
             <li>When a function is called, a new execution context is created and pushed onto the stack.</li>
             <li>When the function finishes executing, its execution context is popped off the stack.</li>
         </ul>
-
         <h2>Example Code</h2>
         <pre><code>
             var a = 10;
-
             function foo() {
-            var b = 20;
-            function bar() {
-                var c = 30;
-                console.log(a + b + c);
+                var b = 20;
+                function bar() {
+                    var c = 30;
+                    console.log(a + b + c);
+                }
+                bar();
             }
-            bar();
-            }
-
             foo();  // Output: 60
         </code></pre>
-
         <h2>Execution Order Explained</h2>
         <ol>
             <li>The script starts and the global execution context is created.</li>
@@ -147,7 +131,6 @@
             <li><code>console.log(a + b + c)</code> runs and outputs <code>60</code>.</li>
             <li>Each execution context is popped off the call stack as the functions finish.</li>
         </ol>
-
         <h1>Hoisting and Execution Context</h1>
         <p>
             When JavaScript creates an <strong>execution context</strong>, the code execution happens in two phases:
@@ -177,15 +160,13 @@
         <pre><code>
             console.log(a); // undefined
             var a = 5;
-
             foo(); // Works fine
             function foo() {
-            console.log('Hello!');
+                console.log('Hello!');
             }
-
             bar(); // Error: bar is not a function
             var bar = function() {
-            console.log('Hi!');
+                console.log('Hi!');
             };
         </code></pre>
         <h2>Behavior of <code>let</code> and <code>const</code> Variables</h2>
@@ -214,7 +195,7 @@
         <pre><code>
             console.log(x); // ReferenceError: Cannot access 'x' before initialization
             let x = 10;
-            </code></pre>
+        </code></pre>
         <p>
             <strong>Summary:</strong>
             <code>let</code> and <code>const</code> are block-scoped, hoisted but not initialized, causing a temporal
@@ -222,6 +203,10 @@
             Additionally, <code>const</code> requires initialization at declaration and cannot be reassigned.
         </p>
 
+        <h2>Lexical Environment</h2>
+        <p>
+            A <strong>lexical environment</strong> is the combination of its local memory and a reference to the lexical environment of its parent.
+        </p>
     </div>
 </body>
 
