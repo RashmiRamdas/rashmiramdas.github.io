@@ -148,6 +148,14 @@
         future to sell that stock.
         Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
       </p>
+      <h4>Example 1:</h4>
+      <p><strong>Input:</strong> <code>prices = [7,1,5,3,6,4]</code><br />
+        <strong>Output:</strong> <code>5</code>
+      </p>
+      <h4>Example 2:</h4>
+      <p><strong>Input:</strong> <code>prices = [7,6,4,3,1]</code><br />
+        <strong>Output:</strong> <code>0</code>
+      </p>
     </div>
     <h3>JavaScript Solution</h3>
     <pre><code>function maxProfit(prices) {
@@ -264,7 +272,8 @@
           <ul>
             <li>Prefix starts at 1.</li>
             <li>For each index <code>i</code>, multiply prefix by the element before <code>i</code> (except for
-              <code>i=0</code>, where prefix stays 1).</li>
+              <code>i=0</code>, where prefix stays 1).
+            </li>
             <li>Push this prefix product into <code>res</code>.</li>
             <li>After this loop, <code>res[i]</code> contains the product of all elements to the left of <code>i</code>.
             </li>
@@ -281,7 +290,8 @@
           </ul>
         </li>
         <li>Finally, <code>res</code> contains the product of all elements except <code>nums[i]</code> for each
-          <code>i</code>.</li>
+          <code>i</code>.
+        </li>
       </ul>
     </div>
   </section>
