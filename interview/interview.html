@@ -187,8 +187,23 @@
         <p> A <strong>closure</strong> is the combination of a function bundled together with its lexical environment.
             In other words, a closure gives a function access to its outer scope. In JavaScript, closures are created
             every time a function is created, at function creation time. </p>
-        <p> <strong>Interview Question:</strong><br /> Consider the following two code snippets: </p>
-        <pre><code> for (var i = 0; i < 6; i++) { function close(i) { setTimeout(() => { console.log(i); }, 1000); } close(i); }for (let i = 0; i < 6; i++) { setTimeout(() => { console.log(i); }, 1000); } </code></pre>
+        <p> <strong>Interview Question:</strong><br /> Log numbers 1 to 5 every second.  </p>
+        <pre><code> 
+            <!-- Solution 1: -->
+            for (var i = 0; i < 6; i++) {
+                 function close(i) { 
+                    setTimeout(() => {
+                         console.log(i); 
+                        }, 1000); 
+                    } 
+                    close(i); 
+            }
+             <!-- Solution 2: -->
+            for (let i = 0; i < 6; i++) { 
+                setTimeout(() => {
+                     console.log(i); 
+                    }, 1000); 
+            } </code></pre>
         <p> <strong>Explanation:</strong><br /> - In the first snippet, a helper function <code>close</code> is used to
             create a closure that captures the current value of <code>i</code> by passing it as a parameter. This
             ensures that when the <code>setTimeout</code> callback runs after 1 second, it logs the correct value of
