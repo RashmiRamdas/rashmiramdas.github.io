@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -15,16 +14,42 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            /* center vertically / min-height: 100vh; text-align: center; } .container { max-width: 700px; width: 100%; background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); / center text inside container / text-align: center; margin: 0 auto; } h1, h2 { color: #0798fa; margin-bottom: 0.5rem; } h1 { color: #0164a6; } p, ul, ol { line-height: 1.6; margin-bottom: 1.5rem; } ul, ol { padding-left: 1.5rem; text-align: left; / keep list text left aligned for readability / display: inline-block; / shrink to content width */
+            min-height: 100vh; /* center vertically */
+            text-align: center;
         }
-
+        .container {
+            max-width: 700px;
+            width: 100%;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center; /* center text inside container */
+            margin: 0 auto;
+        }
+        h1 {
+            color: #0164a6; /* dark blue */
+            margin-bottom: 0.5rem;
+        }
+        h2 {
+            color: #0798fa; /* bright blue */
+            margin-bottom: 0.5rem;
+        }
+        p, ul, ol {
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        ul, ol {
+            padding-left: 1.5rem;
+            text-align: left; /* keep list text left aligned for readability */
+            display: inline-block; /* shrink to content width */
+        }
         code {
             padding: 0.2rem 0.5rem;
             border-radius: 4px;
             font-family: Consolas, monospace;
             font-size: 1rem;
         }
-
         pre {
             background-color: #2d2d2d;
             color: #f8f8f2;
@@ -42,7 +67,6 @@
         }
     </style>
 </head>
-
 <body>
     <div class="container">
         <h1>JavaScript Execution Context</h1>
@@ -146,13 +170,8 @@
         <p> A <strong>closure</strong> is the combination of a function bundled together with its lexical environment.
             In other words, a closure gives a function access to its outer scope. In JavaScript, closures are created
             every time a function is created, at function creation time. </p>
-
-        <p> A <strong>closure</strong> is the combination of a function bundled together with its lexical environment.
-            In other words, a closure gives a function access to its outer scope. In JavaScript, closures are created
-            every time a function is created, at function creation time. </p>
         <p> <strong>Interview Question:</strong><br /> Consider the following two code snippets: </p>
-        <pre><code> for (var i = 0; i < 6; i++) { function close(i) { setTimeout(() => { console.log(i); }, 1000); } close(i); }
-for (let i = 0; i < 6; i++) { setTimeout(() => { console.log(i); }, 1000); } </code></pre>
+        <pre><code> for (var i = 0; i < 6; i++) { function close(i) { setTimeout(() => { console.log(i); }, 1000); } close(i); }for (let i = 0; i < 6; i++) { setTimeout(() => { console.log(i); }, 1000); } </code></pre>
         <p> <strong>Explanation:</strong><br /> - In the first snippet, a helper function <code>close</code> is used to
             create a closure that captures the current value of <code>i</code> by passing it as a parameter. This
             ensures that when the <code>setTimeout</code> callback runs after 1 second, it logs the correct value of
@@ -167,5 +186,4 @@ for (let i = 0; i < 6; i++) { setTimeout(() => { console.log(i); }, 1000); } </c
         </p>
     </div>
 </body>
-
 </html>
