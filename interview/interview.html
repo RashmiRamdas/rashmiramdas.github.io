@@ -189,7 +189,7 @@
             every time a function is created, at function creation time. </p>
         <p> <strong>Interview Question:</strong><br /> Log numbers 1 to 5 every second.  </p>
         <pre><code> 
-            <!-- Solution 1: -->
+            Solution 1:
             for (var i = 0; i < 6; i++) {
                  function close(i) { 
                     setTimeout(() => {
@@ -198,7 +198,7 @@
                     } 
                     close(i); 
             }
-             <!-- Solution 2: -->
+             Solution 2:
             for (let i = 0; i < 6; i++) { 
                 setTimeout(() => {
                      console.log(i); 
