@@ -24,7 +24,7 @@
             padding: 2rem;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center; /* center text inside container */
+            text-align: left; /* center text inside container */
             margin: 0 auto;
         }
         h1 {
@@ -41,8 +41,6 @@
         }
         ul, ol {
             padding-left: 1.5rem;
-            text-align: left; /* keep list text left aligned for readability */
-            display: inline-block; /* shrink to content width */
         }
         code {
             padding: 0.2rem 0.5rem;
@@ -107,7 +105,16 @@
             <li>When the function finishes executing, its execution context is popped off the stack.</li>
         </ul>
         <h2>Example Code</h2>
-        <pre><code> var a = 10; function foo() { var b = 20; function bar() { var c = 30; console.log(a + b + c); } bar(); } foo();  // Output: 60 </code></pre>
+        <pre><code> 
+            var a = 10; 
+            function foo() { 
+                var b = 20; 
+                function bar() { 
+                    var c = 30; 
+                    console.log(a + b + c); } 
+                    bar(); 
+                } 
+            foo();  // Output: 60 </code></pre>
         <h2>Execution Order Explained</h2>
         <ol>
             <li>The script starts and the global execution context is created.</li>
@@ -140,7 +147,17 @@
         </ol>
         <p> Hoisting allows you to use functions before their declaration and variables declared with <code>var</code>
             before their assignment (though their value will be <code>undefined</code> until assigned). </p>
-        <pre><code> console.log(a); // undefined var a = 5; foo(); // Works fine function foo() { console.log('Hello!'); } bar(); // Error: bar is not a function var bar = function() { console.log('Hi!'); }; </code></pre>
+        <pre><code> 
+            console.log(a); // undefined 
+            var a = 5; 
+            foo(); // Works fine 
+            function foo() { 
+                console.log('Hello!'); 
+            } 
+            bar(); // Error: bar is not a function 
+            var bar = function() { 
+                console.log('Hi!'); 
+            }; </code></pre>
         <h2>Behavior of <code>let</code> and <code>const</code> Variables</h2>
         <p> Variables declared with <code>let</code> and <code>const</code> differ from <code>var</code> in terms of
             hoisting and initialization: </p>
