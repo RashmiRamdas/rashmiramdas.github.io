@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Readng Content</title>
+    <title>Reading Content</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -13,43 +14,38 @@
             padding: 2rem;
             display: flex;
             justify-content: center;
-            /* center horizontally */
-            min-height: 100vh;
+            /* center horizontally / min-height: 100vh; } .container { max-width: 700px; width: 100%; background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); text-align: left; / left-align text inside */
         }
-        .container {
-            max-width: 700px;
-            width: 100%;
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: left;
-            /* left-align text inside */
-        }
+
         h1,
         h2 {
             color: #0798fa;
             margin-bottom: 0.5rem;
         }
+
         h1 {
             color: #0164a6;
         }
+
         p,
         ul,
         ol {
             line-height: 1.6;
             margin-bottom: 1.5rem;
         }
+
         ul,
         ol {
             padding-left: 1.5rem;
         }
+
         code {
             padding: 0.2rem 0.5rem;
             border-radius: 4px;
             font-family: Consolas, monospace;
             font-size: 1rem;
         }
+
         pre {
             background-color: #2d2d2d;
             color: #f8f8f2;
@@ -64,13 +60,12 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h1>JavaScript Execution Context</h1>
-        <p>
-            The <strong>Execution Context</strong> is the environment where JavaScript code is evaluated and executed.
-            There are two main types of execution contexts:
-        </p>
+        <p> The <strong>Execution Context</strong> is the environment where JavaScript code is evaluated and executed.
+            There are two main types of execution contexts: </p>
         <ul>
             <li><strong>Global Execution Context</strong></li>
             <li><strong>Function Execution Context</strong></li>
@@ -84,16 +79,14 @@
         <h2>Execution Process</h2>
         <p>When JavaScript code runs, it follows these steps:</p>
         <ol>
-            <li>
-                <strong>Memory Allocation Phase:</strong>
+            <li> <strong>Memory Allocation Phase:</strong>
                 <ul>
                     <li>Memory is allocated for variables and functions.</li>
                     <li>Variables are initialized with <code>undefined</code>.</li>
                     <li>Function declarations are fully stored (hoisted).</li>
                 </ul>
             </li>
-            <li>
-                <strong>Code Execution Phase:</strong>
+            <li> <strong>Code Execution Phase:</strong>
                 <ul>
                     <li>Code executes synchronously, line by line.</li>
                     <li>Variables receive their assigned values during this phase.</li>
@@ -108,18 +101,7 @@
             <li>When the function finishes executing, its execution context is popped off the stack.</li>
         </ul>
         <h2>Example Code</h2>
-        <pre><code>
-            var a = 10;
-            function foo() {
-                var b = 20;
-                function bar() {
-                    var c = 30;
-                    console.log(a + b + c);
-                }
-                bar();
-            }
-            foo();  // Output: 60
-        </code></pre>
+        <pre><code> var a = 10; function foo() { var b = 20; function bar() { var c = 30; console.log(a + b + c); } bar(); } foo();  // Output: 60 </code></pre>
         <h2>Execution Order Explained</h2>
         <ol>
             <li>The script starts and the global execution context is created.</li>
@@ -132,12 +114,10 @@
             <li>Each execution context is popped off the call stack as the functions finish.</li>
         </ol>
         <h1>Hoisting and Execution Context</h1>
-        <p>
-            When JavaScript creates an <strong>execution context</strong>, the code execution happens in two phases:
+        <p> When JavaScript creates an <strong>execution context</strong>, the code execution happens in two phases:
         </p>
         <ol>
-            <li>
-                <strong>Memory Allocation Phase (Creation Phase):</strong>
+            <li> <strong>Memory Allocation Phase (Creation Phase):</strong>
                 <ul>
                     <li>Memory is allocated for variables and functions.</li>
                     <li>Variables declared with <code>var</code> are initialized with <code>undefined</code>.</li>
@@ -145,68 +125,44 @@
                     <li>This process is known as <strong>hoisting</strong>.</li>
                 </ul>
             </li>
-            <li>
-                <strong>Code Execution Phase:</strong>
+            <li> <strong>Code Execution Phase:</strong>
                 <ul>
                     <li>The code runs line-by-line synchronously.</li>
                     <li>Variables are assigned their actual values during this phase.</li>
                 </ul>
             </li>
         </ol>
-        <p>
-            Hoisting allows you to use functions before their declaration and variables declared with <code>var</code>
-            before their assignment (though their value will be <code>undefined</code> until assigned).
-        </p>
-        <pre><code>
-            console.log(a); // undefined
-            var a = 5;
-            foo(); // Works fine
-            function foo() {
-                console.log('Hello!');
-            }
-            bar(); // Error: bar is not a function
-            var bar = function() {
-                console.log('Hi!');
-            };
-        </code></pre>
+        <p> Hoisting allows you to use functions before their declaration and variables declared with <code>var</code>
+            before their assignment (though their value will be <code>undefined</code> until assigned). </p>
+        <pre><code> console.log(a); // undefined var a = 5; foo(); // Works fine function foo() { console.log('Hello!'); } bar(); // Error: bar is not a function var bar = function() { console.log('Hi!'); }; </code></pre>
         <h2>Behavior of <code>let</code> and <code>const</code> Variables</h2>
-        <p>
-            Variables declared with <code>let</code> and <code>const</code> differ from <code>var</code> in terms of
-            hoisting and initialization:
-        </p>
+        <p> Variables declared with <code>let</code> and <code>const</code> differ from <code>var</code> in terms of
+            hoisting and initialization: </p>
         <ul>
-            <li>
-                <strong>Hoisting:</strong> <code>let</code> and <code>const</code> declarations are hoisted to the top
-                of their block scope, but they are <em>not</em> initialized during the memory allocation phase.
-            </li>
-            <li>
-                <strong>Temporal Dead Zone (TDZ):</strong> From the start of the block until the variable declaration is
-                reached, the variable is in a "temporal dead zone." Accessing it before declaration causes a
-                <code>ReferenceError</code>.
-            </li>
-            <li>
-                <strong>Initialization:</strong>
+            <li> <strong>Hoisting:</strong> <code>let</code> and <code>const</code> declarations are hoisted to the top
+                of their block scope, but they are <em>not</em> initialized during the memory allocation phase. </li>
+            <li> <strong>Temporal Dead Zone (TDZ):</strong> From the start of the block until the variable declaration
+                is reached, the variable is in a "temporal dead zone." Accessing it before declaration causes a
+                <code>ReferenceError</code>. </li>
+            <li> <strong>Initialization:</strong>
                 <ul>
                     <li><code>let</code> variables can be declared without initialization and assigned later.</li>
                     <li><code>const</code> variables must be initialized at declaration and cannot be reassigned.</li>
                 </ul>
             </li>
         </ul>
-        <pre><code>
-            console.log(x); // ReferenceError: Cannot access 'x' before initialization
-            let x = 10;
-        </code></pre>
-        <p>
-            <strong>Summary:</strong>
-            <code>let</code> and <code>const</code> are block-scoped, hoisted but not initialized, causing a temporal
-            dead zone until their declaration. Accessing them before declaration throws a <code>ReferenceError</code>.
-            Additionally, <code>const</code> requires initialization at declaration and cannot be reassigned.
-        </p>
-
+        <pre><code> console.log(x); // ReferenceError: Cannot access 'x' before initialization let x = 10; </code></pre>
+        <p> <strong>Summary:</strong> <code>let</code> and <code>const</code> are block-scoped, hoisted but not
+            initialized, causing a temporal dead zone until their declaration. Accessing them before declaration throws
+            a <code>ReferenceError</code>. Additionally, <code>const</code> requires initialization at declaration and
+            cannot be reassigned. </p>
         <h2>Lexical Environment</h2>
-        <p>
-            A <strong>lexical environment</strong> is the combination of its local memory and a reference to the lexical environment of its parent.
-        </p>
+        <p> A <strong>lexical environment</strong> is the combination of its local memory and a reference to the lexical
+            environment of its parent. </p>
+        <h2>Closures</h2>
+        <p> A <strong>closure</strong> is the combination of a function bundled together with its lexical environment.
+            In other words, a closure gives a function access to its outer scope. In JavaScript, closures are created
+            every time a function is created, at function creation time. </p>
     </div>
 </body>
 
