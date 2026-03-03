@@ -96,6 +96,7 @@
       <a href="#best-time-to-buy-and-sell-stock">Best Time to Buy and Sell Stock</a>
       <a href="#contains-duplicate">Contains Duplicate</a>
       <a href="#product-of-array-except-self">Product of Array Except Self</a>
+      <a href="#maximum-subarray">Maximum Subarray</a>
     </nav>
 
     <div id="two-sum" class="problem-statement">
@@ -117,16 +118,16 @@
     </div>
     <h3>JavaScript Solution</h3>
     <pre><code>function twoSum(nums, target) {
-  const numToIndex = new Map();
-  for (let i = 0; i &lt; nums.length; i++) {
-    const complement = target - nums[i];
-    if (numToIndex.has(complement)) {
-      return [numToIndex.get(complement), i];
+      const numToIndex = new Map();
+      for (let i = 0; i &lt; nums.length; i++) {
+        const complement = target - nums[i];
+        if (numToIndex.has(complement)) {
+          return [numToIndex.get(complement), i];
+        }
+        numToIndex.set(nums[i], i);
+      }
     }
-    numToIndex.set(nums[i], i);
-  }
-}
-</code></pre>
+    </code></pre>
     <div class="explanation">
       <h4>Explanation</h4>
       <ul>
@@ -159,18 +160,18 @@
     </div>
     <h3>JavaScript Solution</h3>
     <pre><code>function maxProfit(prices) {
-  let minPrice = Infinity;
-  let maxProfit = 0;
-  for (let price of prices) {
-    if (price &lt; minPrice) {
-      minPrice = price; // Step 1: Update minPrice if current price is lower
-    } else if (price - minPrice &gt; maxProfit) {
-      maxProfit = price - minPrice; // Step 2: Update maxProfit if current profit is higher
+      let minPrice = Infinity;
+      let maxProfit = 0;
+      for (let price of prices) {
+        if (price &lt; minPrice) {
+          minPrice = price; // Step 1: Update minPrice if current price is lower
+        } else if (price - minPrice &gt; maxProfit) {
+          maxProfit = price - minPrice; // Step 2: Update maxProfit if current profit is higher
+        }
+      }
+      return maxProfit; // Step 3: Return the maximum profit found
     }
-  }
-  return maxProfit; // Step 3: Return the maximum profit found
-}
-</code></pre>
+    </code></pre>
     <div class="explanation">
       <h4>Step-by-Step Explanation</h4>
       <ol>
@@ -200,16 +201,16 @@
     </div>
     <h3>JavaScript Solution</h3>
     <pre><code>var containsDuplicate = function(nums) {
-  let set = new Set();
-  for (let num of nums) {
-    if (set.has(num)) {
-      return true;
-    }
-    set.add(num);
-  }
-  return false;
-};
-</code></pre>
+      let set = new Set();
+      for (let num of nums) {
+        if (set.has(num)) {
+          return true;
+        }
+        set.add(num);
+      }
+      return false;
+    };
+    </code></pre>
     <div class="explanation">
       <h4>Explanation</h4>
       <ul>
@@ -294,6 +295,72 @@
         </li>
       </ul>
     </div>
+    <div id="maximum-subarray" class="problem-statement">
+      <h3>Problem Statement: Maximum Subarray</h3>
+      <p>
+        Given an integer array <code>nums</code>, find the subarray with the largest sum, and return its sum.
+      </p>
+      <h4>Example 1:</h4>
+      <p><strong>Input:</strong> <code>nums = [-2,1,-3,4,-1,2,1,-5,4]</code><br />
+        <strong>Output:</strong> <code>6</code><br />
+        <em>Explanation:</em> The subarray <code>[4,-1,2,1]</code> has the largest sum 6.
+      </p>
+      <h4>Example 2:</h4>
+      <p><strong>Input:</strong> <code>nums = [1]</code><br />
+        <strong>Output:</strong> <code>1</code><br />
+        <em>Explanation:</em> The subarray <code>[1]</code> has the largest sum 1.
+      </p>
+      <h4>Example 3:</h4>
+      <p><strong>Input:</strong> <code>nums = [5,4,-1,7,8]</code><br />
+        <strong>Output:</strong> <code>23</code><br />
+        <em>Explanation:</em> The subarray <code>[5,4,-1,7,8]</code> has the largest sum 23.
+      </p>
+    </div>
+
+    <h3>JavaScript Solutions</h3>
+
+    <h4>Solution 1: Brute Force</h4>
+    <pre><code>var maxSubArray1 = function(nums) {
+        var sum = -Infinity;
+        for (var i = 0; i &lt; nums.length; i++) {
+          var currSum = 0;
+          for (var j = i; j < nums.length; j++) {
+            currSum += nums[j];
+            if (currSum &gt; sum) {
+              sum = currSum;
+            }
+          }
+        }
+        return sum;
+    };</code></pre>
+
+    <h4>Solution 2: Optimal - Kadane's Algorithm</h4>
+    <pre><code>
+      var maxSubArray = function(nums) {
+        var maxSum = nums[0];
+        var currSum = 0;
+        for (var i = 0; i &lt; nums.length; i++) {
+          currSum += nums[i];
+          maxSum = Math.max(maxSum, currSum);
+          if (currSum &lt; 0) {
+            currSum = 0;
+          }
+        }
+        return maxSum;
+    };</code></pre>
+
+    <div class="explanation">
+      <h4>Explanation</h4>
+      <ul>
+        <li><strong>maxSum</strong> starts as the first element of the array.</li>
+        <li><strong>currSum</strong> accumulates the sum of the current subarray.</li>
+        <li>If <code>currSum</code> drops below zero, it resets to zero because continuing with a negative sum would
+          reduce the sum of any future subarray.</li>
+        <li><strong>maxSum</strong> keeps track of the highest sum found so far.</li>
+        <li>This approach runs efficiently in <code>O(n)</code> time complexity.</li>
+      </ul>
+    </div>
+
   </section>
   <section id="string-dsa">
     <h2>String DSA</h2>
