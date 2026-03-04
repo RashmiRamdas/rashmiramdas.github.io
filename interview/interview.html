@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -14,9 +15,11 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh; /* center vertically */
+            min-height: 100vh;
+            /* center vertically */
             text-align: center;
         }
+
         .container {
             max-width: 700px;
             width: 100%;
@@ -24,30 +27,42 @@
             padding: 2rem;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: left; /* center text inside container */
+            text-align: left;
+            /* center text inside container */
             margin: 0 auto;
         }
+
         h1 {
-            color: #0164a6; /* dark blue */
+            color: #0164a6;
+            /* dark blue */
             margin-bottom: 0.5rem;
         }
+
         h2 {
-            color: #0798fa; /* bright blue */
+            color: #0798fa;
+            /* bright blue */
             margin-bottom: 0.5rem;
         }
-        p, ul, ol {
+
+        p,
+        ul,
+        ol {
             line-height: 1.6;
             margin-bottom: 1.5rem;
         }
-        ul, ol {
+
+        ul,
+        ol {
             padding-left: 1.5rem;
         }
+
         code {
             padding: 0.2rem 0.5rem;
             border-radius: 4px;
             font-family: Consolas, monospace;
             font-size: 1rem;
         }
+
         pre {
             background-color: #2d2d2d;
             color: #f8f8f2;
@@ -65,6 +80,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h1>JavaScript Execution Context</h1>
@@ -183,11 +199,70 @@
         <h2>Lexical Environment</h2>
         <p> A <strong>lexical environment</strong> is the combination of its local memory and a reference to the lexical
             environment of its parent. </p>
+        <section>
+            <h2>call(), apply(), and bind() Methods</h2>
+            <p>
+                <code>call()</code> and <code>apply()</code> are used to invoke a function while explicitly setting the
+                value of the <code>this</code> keyword. Both methods execute the function immediately.
+            </p>
+            <ul>
+                <li><strong>call()</strong> accepts arguments as a comma-separated list.</li>
+                <li><strong>apply()</strong> accepts arguments as a single array (or array-like object).</li>
+            </ul>
+            <h3>Usage Example:</h3>
+            <pre><code>
+                function greet(greeting, punctuation) {
+                    console.log(`${greeting}, I am ${this.name}${punctuation}`);
+                }
+
+                const person = { name: "Alice" };
+
+                // Using call: arguments are separate
+                greet.call(person, "Hello", "!");
+
+                // Using apply: arguments are in an array
+                greet.apply(person, ["Hi", "."]);
+                </code></pre>
+            <p>
+                <strong>Note on Modern JavaScript (ES6+):</strong> The spread operator has made <code>apply()</code>
+                less necessary. You can now use <code>call()</code> with an array like this:
+            </p>
+            <pre><code>func.call(thisArg, ...argsArray);</code></pre>
+
+            <p>
+                <code>bind()</code> is different from <code>call()</code> and <code>apply()</code> because it does
+                <em>not</em> execute the function immediately. Instead, it creates and returns a new copy of the
+                original function with the <code>this</code> context permanently set.
+            </p>
+            <h3>Usage Example:</h3>
+            <pre><code>
+            const user = {
+                name: "Alice",
+                greet: function() {
+                    console.log(`Hi, I'm ${this.name}`);
+                }
+            };
+
+            // Returns a new function but doesn't run it yet
+            const boundGreet = user.greet.bind(user);
+
+            setTimeout(boundGreet, 1000);
+
+            function multiply(a, b) {
+            return a * b;
+            }
+
+            // Pre-fill 'a' with 2
+            const double = multiply.bind(null, 2);
+            console.log(double(5)); // Output: 10
+            </code></pre>
+        </section>
+
         <h2>Closures</h2>
         <p> A <strong>closure</strong> is the combination of a function bundled together with its lexical environment.
             In other words, a closure gives a function access to its outer scope. In JavaScript, closures are created
             every time a function is created, at function creation time. </p>
-        <p> <strong>Interview Question:</strong><br /> Log numbers 1 to 5 every second.  </p>
+        <p> <strong>Interview Question:</strong><br /> Log numbers 1 to 5 every second. </p>
         <pre><code> 
             Solution 1:
             for (var i = 0; i < 6; i++) {
@@ -218,4 +293,5 @@
         </p>
     </div>
 </body>
+
 </html>
