@@ -259,6 +259,86 @@
             console.log(double(5)); // Output: 10
             </code></pre>
         </section>
+        <section>
+            <h2>Debounce and Throttle</h2>
+
+            <p><strong>Debouncing:</strong><br>
+                Ensures a function is only executed after a specified period of inactivity. This is useful for delaying
+                execution until the user stops triggering the event (e.g., typing in a search box).</p>
+
+            <p><strong>Throttling:</strong><br>
+                Used for rate limiting the function calls. Throttling ensures a function is executed at most once in a
+                specified time interval. It guarantees the function runs at a regular, controlled rate, regardless of
+                how many times the event fires (e.g., window resizing or scrolling).</p>
+
+            <h3>Example Code:</h3>
+
+            <pre><code>
+            // Debounce function: delays execution until after delay ms of inactivity
+            function debounce(cb, delay) {
+            let timer;
+            return function (...args) {
+                const context = this;
+                clearTimeout(timer);
+                timer = setTimeout(() => {
+                cb.apply(context, args);
+                }, delay);
+            };
+            }
+
+            // Throttle function: ensures function runs at most once every delay ms
+            function throttle(func, delay) {
+            let shouldWait = false;
+            return function (...args) {
+                if (shouldWait) return;
+                const context = this;
+                func.call(context, ...args);
+                shouldWait = true;
+                setTimeout(() => {
+                shouldWait = false;
+                }, delay);
+            };
+            }
+
+            // Function to simulate fetching data and displaying it
+            function fetchData(id, value) {
+            console.log("Fetching data... ", value);
+            document.getElementById(id).textContent = value;
+            }
+
+            // Normal input handler (no debounce or throttle)
+            function getData(e, id) {
+            fetchData(id, e.target.value);
+            }
+
+            // Debounced input handler
+            const handleDebounceKeyUp = debounce(getData, 1000);
+
+            // Throttled input handler
+            const handleThrottleKeyUp = throttle(getData, 1000);
+            </code></pre>
+
+            <h3>Usage Example:</h3>
+
+            <div>
+                <p>
+                    <label for="normal-input">Normal:</label>
+                    <input type="text" id="normal-input" onkeyup="getData(event, 'normal-output')" />
+                    <span id="normal-output"></span>
+                </p>
+                <p>
+                    <label for="debounce-input">Debounce:</label>
+                    <input type="text" id="debounce-input" onkeyup="handleDebounceKeyUp(event, 'debounce-output')" />
+                    <span id="debounce-output"></span>
+                </p>
+                <p>
+                    <label for="throttle-input">Throttle:</label>
+                    <input type="text" id="throttle-input" onkeyup="handleThrottleKeyUp(event, 'throttle-output')" />
+                    <span id="throttle-output"></span>
+                </p>
+            </div>
+        </section>
+
 
         <h1>Closures</h1>
         <p> A <strong>closure</strong> is the combination of a function bundled together with its lexical environment.
