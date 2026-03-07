@@ -376,4 +376,49 @@
     </div>
 </body>
 
+
+
+<!-- To make example in above notes work -->
+<script>
+    function debounce(cb, delay) {
+        let timer;
+        return function (...args) {
+            const context = this;
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                cb.apply(context, args);
+            }, delay);
+        };
+    }
+
+    function throttle(func, delay) {
+        let shouldWait = false;
+        return function (...args) {
+            if (shouldWait) return;
+            const context = this;
+            func.call(context, ...args);
+            shouldWait = true;
+
+            setTimeout(() => {
+                shouldWait = false;
+            }, delay)
+        }
+    }
+
+    function fetchData(id, value) {
+        console.log("Fetching data... ", value);
+        document.getElementById(id).textContent = value;
+    }
+
+    function getData(e, id) {
+        fetchData(id, e.target.value);
+    }
+
+    const handleDebounceKeyUp = debounce(getData, 1000);
+
+    const handleThrottleKeyUp = throttle(getData, 1000);
+
+
+</script>
+
 </html>
