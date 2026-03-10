@@ -86,7 +86,6 @@
         .highlight {
             padding: 10px;
             border-left: 5px solid #f7d600;
-
     </style>
 </head>
 
@@ -114,7 +113,11 @@
         </li>
         <li><strong>Web APIs (Browser Environment):</strong> These are environments outside the JavaScript engine that
             handle asynchronous operations in the background. Examples include <code>setTimeout()</code>, DOM events,
-            and network requests (like <code>fetch</code> or file I/O).</li>
+            and network requests (like <code>fetch</code> or file I/O).
+            The Web API environment stores the callback functions (or references to them) when you register asynchronous
+            operations like timers (setTimeout), event listeners, or promises. When the relevant event occurs or the
+            timer expires, the callback reference is pushed into the appropriate queue (callback queue for macrotasks or
+            microtask queue for microtasks).</li>
         <li><strong>Callback Queue (Task/Macrotask Queue):</strong> This queue holds the callback functions for
             macrotasks (like timers and I/O events) once their asynchronous operations are complete. It's a First-In,
             First-Out (FIFO) data structure.</li>
