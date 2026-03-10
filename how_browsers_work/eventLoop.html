@@ -82,6 +82,24 @@
             background-color: #0366d6;
             color: white;
         }
+
+        .highlight {
+            background-color: #fffb91;
+            padding: 10px;
+            border-left: 5px solid #f7d600;
+            animation: highlightPulse 2s infinite alternate;
+        }
+
+        @keyframes highlightPulse {
+            0% {
+                background-color: #fffb91;
+            }
+
+            100% {
+                background-color: #fff176;
+            }
+        }
+
     </style>
 </head>
 
@@ -95,7 +113,6 @@
         However, it supports asynchronous operations (e.g., timers, network requests) without blocking the main thread.
         The event loop is the mechanism that enables this non-blocking behavior by managing execution and handling
         asynchronous callbacks.</p>
-
     <h2>Key Components</h2>
     <ul>
         <li><strong>Call Stack:</strong>
@@ -103,10 +120,9 @@
                 <li>The JavaScript engine processes all synchronous code. Function calls are pushed
                     onto the Call Stack and popped off as they return.</li>
                 <li>When an asynchronous function is encountered (e.g., setTimeout, fetch), it initiates the operation
-                    via a Web
-                    API, and the original call immediately pops off the Call Stack, allowing the rest of the synchronous
-                    code to
-                    run without blocking.</li>
+                    via a Web API, and the original call immediately pops off the Call Stack, allowing the rest of the
+                    synchronous
+                    code to run without blocking.</li>
             </ul>
         </li>
         <li><strong>Web APIs (Browser Environment):</strong> These are environments outside the JavaScript engine that
@@ -125,7 +141,6 @@
             </ul>
         </li>
     </ul>
-
     <h2>How Does the Event Loop Work?</h2>
     <ol>
         <li><strong>Execution Phase:</strong> JavaScript runs the code inside the call stack until it's empty.</li>
@@ -138,7 +153,6 @@
         <li><strong>Repeat:</strong> The event loop continuously cycles through these steps, allowing asynchronous code
             to be executed after the synchronous code finishes.</li>
     </ol>
-
     <h2>Summary</h2>
     <p>JavaScript is single-threaded, meaning it executes one task at a time on its call stack. When an asynchronous
         operation is initiated via browser-provided Web APIs, the initial function call runs on the call stack, but the
@@ -148,6 +162,24 @@
         processes tasks from the task queue but always prioritizes emptying the microtask queue first, ensuring
         microtasks run immediately after the current task completes and before moving on to the next task. This
         mechanism allows JavaScript to handle asynchronous behavior efficiently without blocking the single thread.</p>
+    <p>In addition, the browser provides various Web APIs (such as <code>setTimeout()</code>, DOM APIs,
+        <code>fetch()</code>,
+        <code>localStorage</code>, and others) that extend JavaScript’s capabilities beyond the core engine. Callback
+        functions
+        and event handlers are stored in the Web API environment and transferred to the appropriate queues when ready.
+        Event listeners remain in the Web API environment until explicitly removed to avoid memory leaks. The event loop
+        ensures that asynchronous callbacks from these queues are executed in an orderly fashion, with microtasks taking
+        precedence over macrotasks, enabling efficient and non-blocking execution of JavaScript code.
+    </p>
+
+    <h2>Q &amp; A</h2>
+    <p class="highlight"><strong>Q:</strong> Does the Web API environment store only the callback function and push the
+        same callback to the callback or microtask queue?</p>
+    <p class="highlight"><strong>A:</strong> Yes, the Web API environment stores the callback functions and schedules
+        references to them in the appropriate queues. In the case of event listeners (such as click handlers), the
+        original callback functions remain stored in the Web API environment indefinitely. Therefore, it is important to
+        explicitly remove event listeners when they are no longer needed to allow the garbage collector to free up
+        memory effectively.</p>
 
 </body>
 
