@@ -99,6 +99,7 @@
       <a href="#maximum-subarray">Maximum Subarray</a>
       <a href="#maximum-product-subarray">Maximum Product Subarray</a>
       <a href="#find-minimum-in-rotated-sorted-array">Find Minimum in Rotated Sorted Array</a>
+      <a href="#search-in-rotated-sorted-array">Search in Rotated Sorted Array</a>
     </nav>
 
     <div id="two-sum" class="problem-statement">
@@ -488,6 +489,73 @@
           <li>Otherwise, the minimum is at <code>mid</code> or to the left of <code>mid</code>.</li>
         </ul>
         <li>Narrow down the search range until <code>left</code> meets <code>right</code>.</li>
+      </ul>
+    </div>
+
+    <div id="search-in-rotated-sorted-array" class="problem-statement">
+      <h3>Problem Statement: Search in Rotated Sorted Array</h3>
+      <p> Given the array <code>nums</code> after the possible rotation and an integer <code>target</code>, return the
+        index of <code>target</code> if it is in <code>nums</code>, or <code>-1</code> if it is not in
+        <code>nums</code>. You must write an algorithm with <code>O(log n)</code> runtime complexity.
+      </p>
+      <h4>Examples:</h4>
+      <p> <strong>Example 1:</strong><br /> Input: <code>nums = [6, 7, 8, 0, 1, 2, 3, 4, 5]</code>,
+        <code>target = 0</code><br /> Output: <code>3</code>
+      </p>
+      <p> <strong>Example 2:</strong><br /> Input: <code>nums = [6, 7, 8, 0, 1, 2, 3, 4, 5]</code>,
+        <code>target = 7</code><br /> Output: <code>1</code>
+      </p>
+      <p> <strong>Example 3:</strong><br /> Input: <code>nums = [1]</code>, <code>target = 0</code><br /> Output:
+        <code>-1</code>
+      </p>
+    </div>
+    <h3>JavaScript Solution</h3>
+    <pre><code>
+      function search(nums, target) {
+        let left = 0;
+        let right = nums.length - 1;
+        while (left <= right) {
+          let mid = Math.floor((left + right) / 2);
+          if (nums[mid] === target) {
+            return mid;
+          }
+          // Check if the left half is sorted
+          if (nums[left] <= nums[mid]) {
+            // Target is in the left sorted half
+            if (nums[left] <= target && target < nums[mid]) {
+              right = mid - 1;
+            } else {
+              left = mid + 1;
+            }
+          } else {
+            // Right half is sorted
+            if (nums[mid] < target && target <= nums[right]) {
+              left = mid + 1;
+            } else {
+              right = mid - 1;
+            }
+          }
+        }
+        return -1; // target not found
+      }
+    </code></pre>
+    <div class="explanation">
+      <h4>Explanation</h4>
+      <ul>
+        <li>The array is a rotated sorted array, meaning one part is sorted, and the other is rotated.</li>
+        <li>We use a modified binary search to maintain <code>O(log n)</code> time complexity.</li>
+        <li>At each step, check if the left half (<code>nums[left]</code> to <code>nums[mid]</code>) is sorted.</li>
+        <li>If left half is sorted, check if the target lies within this range: <ul>
+            <li>If yes, search in the left half by adjusting <code>right</code>.</li>
+            <li>If no, search in the right half by adjusting <code>left</code>.</li>
+          </ul>
+        </li>
+        <li>If the left half is not sorted, then the right half must be sorted: <ul>
+            <li>If the target lies within the right half, adjust <code>left</code> to search there.</li>
+            <li>Otherwise, adjust <code>right</code> to search in the left half.</li>
+          </ul>
+        </li>
+        <li>Repeat until the target is found or the search space is exhausted.</li>
       </ul>
     </div>
 
