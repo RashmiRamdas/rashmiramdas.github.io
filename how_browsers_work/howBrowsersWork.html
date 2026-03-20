@@ -200,13 +200,10 @@
                 before continuing. This can slow down page loading.
               </li>
               <li>
-                Using defer tells the browser to download the script but wait to
-                execute it until after the HTML is fully parsed.
+                <strong>defer:</strong>strong> Downloads the script asynchronously but waits until the entire HTML document is fully parsed before executing. (Maintains the original order of scripts).
               </li>
               <li>
-                Using async tells the browser to download and execute the script
-                asynchronously, without blocking HTML parsing, but execution
-                order isn't guaranteed.
+                <strong>async:</strong> Downloads the script asynchronously. As soon as it finishes downloading, the parser pauses to execute it immediately. (Execution order is not guaranteed).
               </li>
               <li>Both help make page loading smoother and faster.</li>
             </ul>
